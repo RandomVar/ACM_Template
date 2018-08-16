@@ -2,7 +2,7 @@
 const int maxn= " "; 
 int a[maxn],b[maxn];
 
-int lcs(int n) {
+int lis(int n) {
     b[1]=a[1];
     int len=1;
     for(int i=2;i<=n;i++) 
