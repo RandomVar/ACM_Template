@@ -8,7 +8,11 @@ rank为名次数组rank[i开头的后缀]=的名次
 height为相邻两个后缀的最长公共前缀
 */
 //n为字符串的长度,字符集的值为0~m-1
-
+/*
+build(128,s.size())
+height[ 1-n ]
+height[i]为以sa[i-1]和sa[i]开头的后缀 的最长公共前缀
+*/
 void build_sa(int m, int n)
 {
     n++;
