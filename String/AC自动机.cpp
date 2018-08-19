@@ -80,7 +80,7 @@ int main(){
         cin>>buf,ac.inser(buf);
     ac.build();
     cin>>buf;
-    cout<<ac.query(buf);
+    cout<<ac.query(buf)<<endl;
   }
 
 return 0;
