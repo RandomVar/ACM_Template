@@ -1,5 +1,6 @@
 
 /****AC自动机 HUD-2222****/
+/*以now节点结尾的后缀 与 root-fail[now]所表示的字符串 相同*/
 struct trie{
    int next[maxn][26],fail[maxn],ed[maxn];
    int root,cnt;

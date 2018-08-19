@@ -10,7 +10,7 @@ height为相邻两个后缀的最长公共前缀
 //n为字符串的长度,字符集的值为0~m-1
 /*
 build(128,s.size())
-height[ 1-n ]
+height[ 2-s.size() ] 有效
 height[i]为以sa[i-1]和sa[i]开头的后缀 的最长公共前缀
 */
 void build_sa(int m, int n)
