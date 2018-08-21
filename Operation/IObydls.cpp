@@ -120,7 +120,7 @@ namespace IO{
     #undef OUT_SIZE 
     #undef BUF_SIZE 
 };
-x=IO::read();
+IO::read(x);
 IO::println(Ans);
 IO::print(i!=k?' ':'\n');
 可混用cin
