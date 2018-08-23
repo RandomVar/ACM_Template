@@ -1,4 +1,4 @@
-####int/float to string/array:
+#### int/float to string/array:
 
 + itoa()：将整型值转换为字符串。
 + ltoa()：将长整型值转换为字符串。
@@ -8,7 +8,7 @@
 + fcvt()：指定位数为转换精度，其余同ecvt()。
 
 
-####string/array to int/float
+#### string/array to int/float
 
 + atof()：将字符串转换为双精度浮点型值。
 + atoi()：将字符串转换为整型值。
