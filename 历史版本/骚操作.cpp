@@ -1,4 +1,4 @@
-/*¿ìËÙÊäÈëÊä³ö*/
+/*å¿«é€Ÿè¾“å…¥è¾“å‡º*/
 template <class T> inline bool scan_d(T &ret) {
     char c; int sgn;
     if(c=getchar(),c==EOF) return 0; //EOF

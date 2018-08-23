@@ -1,6 +1,6 @@
-/*Æğµã±êºÅ¾ùÒÑ¸ÄÎª´Ó1¿ªÊ¼*/
+/*èµ·ç‚¹æ ‡å·å‡å·²æ”¹ä¸ºä»1å¼€å§‹*/
 /*****Dijkstra POJ - 2387*****/
-/*×¢ÒâÖØ¸´±ßµÄÊäÈëÇé¿ö*/
+/*æ³¨æ„é‡å¤è¾¹çš„è¾“å…¥æƒ…å†µ*/
 int cost[maxn][maxn];
 int dis[maxn];
 int vis[maxn];
@@ -25,7 +25,7 @@ void dij(int x){
   }
 }
 
-/* Dijkstar Ëã·¨+¶ÑÓÅ»¯ Ê¹ÓÃÓÅÏÈ¶ÓÁĞÓÅ»¯£¬¸´ÔÓ¶È O (E log E) */
+/* Dijkstar ç®—æ³•+å †ä¼˜åŒ– ä½¿ç”¨ä¼˜å…ˆé˜Ÿåˆ—ä¼˜åŒ–ï¼Œå¤æ‚åº¦ O (E log E) */
 const int INF=0x3f3f3f3f;
 const int maxn=1110;
 int d[maxn];
@@ -53,8 +53,8 @@ void dij(){
 }}
 
 /****Bellman-Ford****/
-/*µ¥Ô´¸º»·*/
-/*o(n^3)Ëã·¨*/
+/*å•æºè´Ÿç¯*/
+/*o(n^3)ç®—æ³•*/
 int dis[maxn];
 int cost[maxn][maxn];
 void bell(int x){
@@ -87,8 +87,8 @@ void bell(int x){
   }
 }
 
-/*ÔÙÅĞ¶ÏÓĞÎŞ¸º»·»ØÂ·*/
-/*·µ»Ø1Ôò´æÔÚ¸º»·»ØÂ·*/
+/*å†åˆ¤æ–­æœ‰æ— è´Ÿç¯å›è·¯*/
+/*è¿”å›1åˆ™å­˜åœ¨è´Ÿç¯å›è·¯*/
 struct edge{
  int s,e,w
 }edges[maxm];
@@ -101,7 +101,7 @@ int bell(int x){
     for(int i=1;i<=m;i++){
         if(edges[i].w!=INF&&dis[edges[i].e]>dis[edges[i].s]+edges[i].w){
             dis[edges[i].e]=dis[edges[i].s]+edges[i].w;
-            if(k==n) return 1;/*ÈôµÚn´ÎÑ­»·µÄÊ±ºòÂ·¾¶»¹ÄÜÔÚËõ¶Ì£¬ËµÃ÷´æÔÚ¸º»·»ØÂ·*/
+            if(k==n) return 1;/*è‹¥ç¬¬næ¬¡å¾ªç¯çš„æ—¶å€™è·¯å¾„è¿˜èƒ½åœ¨ç¼©çŸ­ï¼Œè¯´æ˜å­˜åœ¨è´Ÿç¯å›è·¯*/
         }
     }
   }
@@ -109,15 +109,15 @@ int bell(int x){
 }
 
 /****SPFA****/
-/*Èô´æÔÚ¸º»·»ØÂ·Ôò·µ»Ø1*/
+/*è‹¥å­˜åœ¨è´Ÿç¯å›è·¯åˆ™è¿”å›1*/
 struct edge{
   int to,cost;
   edge(int To,int Cost):to(To),cost(Cost){};
 };
 vector<edge>edges[maxn];
 int dis[maxn];
-int vis[maxn]//±ê¼ÇÃ¿¸öµãÊÇ·ñÔÚ¶ÓÁĞÀï
-int cnt[maxn]//ÅĞ¶ÏÊÇ·ñ´æÔÚ¸º»·»ØÂ·;ÈôÓĞµã¸üĞÂ³¬¹ın´Î£¬Ôò´æÔÚ¸º»·
+int vis[maxn]//æ ‡è®°æ¯ä¸ªç‚¹æ˜¯å¦åœ¨é˜Ÿåˆ—é‡Œ
+int cnt[maxn]//åˆ¤æ–­æ˜¯å¦å­˜åœ¨è´Ÿç¯å›è·¯;è‹¥æœ‰ç‚¹æ›´æ–°è¶…è¿‡næ¬¡ï¼Œåˆ™å­˜åœ¨è´Ÿç¯
 int spfa(int x){
   memset(dis,0x3f,sizeof(dis));
   memset(vis,0,sizeof(vis));

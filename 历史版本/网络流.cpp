@@ -1,8 +1,8 @@
-/***dinic算法 HDU - 1532****/
-/*复杂度o(n^2*m)*/
+/***dinic绠楁硶 HDU - 1532****/
+/*澶嶆潅搴(n^2*m)*/
 struct edge{
  int to,cap;
- int rev;//反向边的序号
+ int rev;//鍙嶅悜杈圭殑搴忓彿
 };
 vector<edge>edges[maxn];
 int level[maxn];
