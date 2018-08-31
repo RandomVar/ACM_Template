@@ -44,3 +44,8 @@ s=ss.str(); //s="5.222"
 /*取子串*/
 string sub1 = s.substr(5); //从下标为5开始一直到结尾
 string sub2 = s.substr(5, 3); //从下标为5开始截取长度为3位
+
+/*char 数组操作*/
+strcpy
+/*https://blog.csdn.net/ncabhd/article/details/72903123*/  
+strcat(charr5, " juice");//添加到末尾  
