@@ -3,7 +3,7 @@
 #define fir first
 #define sec second
 #define mem(a,x) memset(a,x,sizeof(a))
-#define mpr make_pair
+#define mkr make_pair
 typedef long long ll;
 using namespace std;
 const int inf=0x3f3f3f3f;
