@@ -1,14 +1,13 @@
 /****最小生成树Kruskal poj2421****/
 /*时间复杂度取决于边数 o(E logE)*/
-const int maxm=" ";
 const int maxn=" ";
-
 struct node{
-  int u,v,w;
+  int u,v;ll w;
   bool operator<(const node &b)const{
       return w<b.w;
   }
-}edge[maxm];
+};
+vector<node>edge[maxn];
 int p[maxn];
 void init(int n)
 {
@@ -33,23 +32,23 @@ int Union(int x,int y)
       return 1;
 }
 
-void kruskal(int n,int m)
+void kruskal(int n)
 {
-  int sum=0;//生成树的总权值
+  ll sum=0;
   int num=0;//已选用的边的数目
   init(n);
-  sort(edge,edge+m);
-  for(int i=0;i<m;i++)
+  sort(edge.begin(),edge.end());
+  for(int i=0;i<edge.size();i++)
   {
     int u=edge[i].u;
     int v=edge[i].v;
-    int w=edge[i].w;
-    if(Find(u)!=Find(v)) {
-        Union(u,v);
+    ll w=edge[i].w;
+    if(Union(u,v))
+      {
         num++;sum+=w;
       }
-  if(num==n-1) break;
-  }  
+     if(num==n-1) break;
+   }
 }
 
 /*****最小生成树Prim *****/
@@ -81,5 +80,3 @@ int prim(int n){
   }
   return sum;
 }
-
-
