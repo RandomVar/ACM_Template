@@ -33,16 +33,16 @@ bool miuller_rabin(ull n)
 
 /* 埃式筛 */
 /*值为false表示素数，值为true表示非素数 */
-/* 复杂度O(nloglogn) */
+/* 复杂度O(n*log(logn)) */
 
 const int MAXN = " 1e6 ";
 bool notprime[MAXN];
-void init() 
+void init()
  {
     memset(notprime,false,sizeof(notprime));
     notprime[0]=notprime[1]=true;
     for(int i=2;i<MAXN;i++)
-        if(!notprime[i]) 
+        if(!notprime[i])
         {
             if(i>MAXN/i)  continue;//防爆 long long
           for(int j=i*i;j<MAXN;j+=i)
@@ -77,7 +77,7 @@ void getPrime()
 /* fat[i][0]表示第i个质因子，fat[i][1]表示该质因子的个数 */
 ll fat[100][2];
 int fcnt;
-int getfats(ll x) 
+int getfats(ll x)
 {
     fcnt=0;
     ll tmp=x;
@@ -90,15 +90,15 @@ int getfats(ll x)
             while(tmp%prime[i]==0)
              {
             fat[fcnt][1]++;
-            tmp/=prime[i]; 
+            tmp/=prime[i];
              }
             fcnt++;
-        } 
+        }
     }
-       if(tmp!=1)  
+       if(tmp!=1)
        {
          fat[fcnt][0]=tmp;
-         fat[fcnt++][1]=1; 
+         fat[fcnt++][1]=1;
         }
    return fcnt;
 }
@@ -118,9 +118,3 @@ void init(){
         }
       }}
 }
-
-
-
-
-
-
