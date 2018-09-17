@@ -8,7 +8,8 @@ void ST(int n) {
 }
 
 int RMQ(int l, int r) {
-    int k = 0;
-    while ((1 << (k + 1)) <= r - l + 1) k++;
+    // int k = 0;
+    int k = 31 - __builtin_clz(r - l + 1);
+    // while ((1 << (k + 1)) <= r - l + 1) k++;
     return max(dp[l][k], dp[r - (1 << k) + 1][k]);
 }
