@@ -42,7 +42,7 @@ int lca(int u,int v){
 /*ST表预处理lca  o（nlogn+q）*/
 vector<int> edge[maxn], sp;
 int dep[maxn], dfn[maxn];
-PII dp[21][maxn << 1];
+Pair<int,int> dp[21][maxn << 1];
 void init(int n)
 {
     for (int i = 0; i < n; i++) edge[i].clear();

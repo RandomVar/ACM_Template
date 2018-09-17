@@ -1,11 +1,13 @@
 
 /****AC自动机 HUD-2222****/
 /*以now节点结尾的后缀 与 root-fail[now]所表示的字符串 相同*/
+const int NUMA=26;
 struct trie{
-   int next[maxnode][26],fail[maxnode],ed[maxnode];//attention
+    
+   int next[maxnode][NUMA],fail[maxnode],ed[maxnode];//attention
    int root,cnt;
    int newnode(){
-      for(int i=0;i<26;i++)
+      for(int i=0;i<NUMA;i++)
         next[cnt][i]=-1;
       ed[cnt++]=0;
       return cnt-1;
@@ -30,7 +32,7 @@ struct trie{
    void build(){
      queue<int>que;
      fail[root]=root;
-     for(int i=0;i<26;i++){
+     for(int i=0;i<NUMA;i++){
         if(next[root][i]==-1)
              next[root][i]=root;
         else{
@@ -40,7 +42,7 @@ struct trie{
         while(!que.empty()){
             int now=que.front();
             que.pop();
-            for(int i=0;i<26;i++){
+            for(int i=0;i<NUMA;i++){
                 if(next[now][i]==-1)
                     next[now][i]=next[fail[now]][i];
                 else{
@@ -70,10 +72,6 @@ struct trie{
 char buf[maxn];
 trie ac;
 int main(){
-  ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-  int t;
-  cin>>t;
-  while(t--){
     int n;
     cin>>n;
     ac.init();
@@ -82,7 +80,5 @@ int main(){
     ac.build();
     cin>>buf;
     cout<<ac.query(buf)<<endl;
-  }
-
 return 0;
 }
