@@ -1,4 +1,5 @@
 /* hash */
+/**备选素数 1572869, 3145739, 6291469, 12582917, 25165843, 50331653*/
 const int maxn = "1e5";
 const int seed=31;
 ull h[maxn];
@@ -16,7 +17,7 @@ ull str_hash(int l,int r){
 void Hash()
  {
    for(int i=0;i<len;i++)
-      h[i+1]=h[i]*seed+s[i]-'a'+1; 
+      h[i+1]=h[i]*seed+s[i]-'a'+1;
   }
 
   /* 随机数双哈希（csl）Gym101808B */
@@ -91,3 +92,26 @@ for(int i=0;i<n;i++)
     cnt[j-i][{sum1,sum2}]++;//长度相同的放在一个map
   }
 }
+
+/*PROVIDE BY CSL**/
+typedef unsigned long long ull;
+const ull Seed_Pool[] = {146527, 19260817};
+const ull Mod_Pool[] = {1000000009, 998244353};
+struct Hash
+{
+    ull SEED, MOD;
+    vector<ull> p, h;
+    Hash() {}
+    Hash(const string& s, const int& seed_index, const int& mod_index)
+    {
+        SEED = Seed_Pool[seed_index];
+        MOD = Mod_Pool[mod_index];
+        int n = s.length();
+        p.resize(n + 1), h.resize(n + 1);
+        p[0] = 1;
+        for (int i = 1; i <= n; i++) p[i] = p[i - 1] * SEED % MOD;
+        for (int i = 1; i <= n; i++) h[i] = (h[i - 1] * SEED % MOD + s[i - 1]) % MOD;
+    }
+    ull get(int l, int r) { return (h[r] - h[l] * p[r - l] % MOD + MOD) % MOD; }
+    ull substr(int l, int m) { return get(l, l + m); }
+};
