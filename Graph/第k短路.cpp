@@ -102,6 +102,5 @@ int main()
         }
         spfa(t);
         ll ans=Astar(s,t);
-    }
     return 0;
 }
