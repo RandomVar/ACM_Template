@@ -1,6 +1,7 @@
-Java大数高精度亲情讲义
+/*Java大数高精度亲情讲义
 
 java输入输出架构（注意主类为Main）
+*/
 import java.util.Scanner;//输入架构
 public class Main {
 	public static void main(String[] args) {
@@ -12,7 +13,7 @@ public class Main {
 	}
 }
 
-java函数调用
+/*java函数调用*/
 import java.util.Scanner;
 public class Main {
 	public static int gcd(int a,int b)
@@ -48,5 +49,3 @@ public class Main {
 	}
 
 }
-
-
