@@ -1,3 +1,4 @@
+/*矩形面积并*/
 #include<bits/stdc++.h>
 using namespace std;
 const int maxn=2010;

@@ -1,3 +1,4 @@
+/*回文自动机*/
 const int N = 100005;
 struct Palindromic_Tree
 {

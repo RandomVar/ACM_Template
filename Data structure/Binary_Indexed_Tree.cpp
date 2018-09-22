@@ -1,4 +1,4 @@
-/* 单点更新 */
+/* 树状数组单点更新 */
 
 int lowbit(int x){
 return x&(-x);

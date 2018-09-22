@@ -1,3 +1,5 @@
+/*次小生成数*/
+
 #include<cstdio>
 #include<iostream>
 #include<cstring>

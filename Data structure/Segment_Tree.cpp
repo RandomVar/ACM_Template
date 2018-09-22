@@ -17,7 +17,7 @@ void build(int l,int r,int rt){
 }
 
 T query(int l,int r,int L,int R,int rt){
- if(l>=L&&r<=R) 
+ if(l>=L&&r<=R)
        return tree[rt];
  T ans=0;
  int mid=(l+r)/2;
@@ -78,12 +78,12 @@ void update(int l,int r,int L,int R,T add,int rt){
   }
   pushdown(r-l+1,rt);
   int mid=(l+r)/2;
-  if(L<=mid) 
+  if(L<=mid)
     update(l,mid,L,R,add,rt*2);
-  
+
   if(R>mid)
     update(mid+1,r,L,R,add,rt*2+1);
-  
+
   pushup(rt);
 }
 

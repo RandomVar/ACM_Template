@@ -1,3 +1,4 @@
+/*第k短路*/
 const int MAXM= "" ;
 const int MAXN= "" ;
 struct node
@@ -77,7 +78,7 @@ ll Astar(int src, int des)
         if(tt.v == des)
         {
             cnt++;
-            if(cnt == k) 
+            if(cnt == k)
                 return tt.g;
         }
         for(int i = head[tt.v]; i != -1; i = edge[i].next)

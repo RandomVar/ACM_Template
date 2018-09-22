@@ -1,3 +1,5 @@
+/* 区间不同数 */
+/*主席树*/
 #include<bits/stdc++.h>
 using namespace std;
 const int maxn=2*1e5+100;
@@ -73,9 +75,8 @@ int main()
    }
 }
 /*
-求[1,l],[r,n]区间内不同数的个数
+树状数组
 
-拼接上一段相同的区间后变成一道模板题
 */
 #include<cstdio>
 #include<iostream>

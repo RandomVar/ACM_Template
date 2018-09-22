@@ -1,3 +1,4 @@
+/*单调栈单调队列和笛卡尔树*/
 /** 单调栈 cf602D **/
 /*找出左侧第一个大于它的数*/
  int top=-1;
@@ -10,7 +11,7 @@
             //all the elem in the left no more larger than i
       else
             //the nearest left elem larger than i
-        
+
     st[++top]=i;//add i to the stack
   }
 
@@ -22,7 +23,7 @@
     {
         while(top>=0&&a[i]<=a[que[top]])
             top--;
-        
+
         que[++top]=i;
         b[0]=a[que[0]];
     }
