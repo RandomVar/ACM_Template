@@ -42,7 +42,7 @@ int lca(int u,int v){
 /*ST表预处理lca  o（nlogn+q）*/
 vector<int> edge[maxn], sp;
 int dep[maxn], dfn[maxn];
-Pair<int,int> dp[21][maxn << 1];
+pair<int,int> dp[21][maxn << 1];
 void init(int n)
 {
     for (int i = 0; i < n; i++) edge[i].clear();
@@ -73,5 +73,5 @@ int lca(int u, int v)
     int l = dfn[u], r = dfn[v];
     if (l > r) swap(l, r);
     int k = 31 - __builtin_clz(r - l + 1);
-    return min(dp[k][l], dp[k][r - (1 << k) + 1]).Y;
+    return min(dp[k][l], dp[k][r - (1 << k) + 1]).sec;
 }
