@@ -81,7 +81,8 @@ int getfats(ll x)
 {
     fcnt=0;
     ll tmp=x;
-    for(int i=1;prime[i]<=tmp/prime[i];i++) // if x is larger than 1e7,may need add condition i<prime[0]
+    for(int i=1;prime[i]<=tmp/prime[i];i++) 
+    // if x is larger than 1e7,may need add condition i<prime[0]
     {
         fat[fcnt][1]=0;
         if(tmp%prime[i]==0)

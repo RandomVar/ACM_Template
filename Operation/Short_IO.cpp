@@ -1,7 +1,8 @@
 /*steal from zerol*/
 1inline char next_char() {
     static char buf[100000], *p1 = buf, *p2 = buf;
-    return p1 == p2 && (p2 = (p1 = buf) + fread(buf, 1, 100000, stdin), p1 == p2) ? EOF : *p1++;
+    return p1 == p2 && 
+    (p2 = (p1 = buf) + fread(buf, 1, 100000, stdin), p1 == p2) ? EOF : *p1++;
 }
 inline bool maybe_digit(char c) {
     return c >= '0' && c <= '9';

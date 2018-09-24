@@ -133,7 +133,11 @@ void splay(int x)
 void access(int x)
 {
     int t = 0;
-    while(x) splay(x) , si[x] += sum[c[1][x]] - sum[t] , c[1][x] = t , pushup(x) , t = x , x = fa[x];
+    while(x) 
+    {
+        splay(x) ;
+        si[x] += sum[c[1][x]] - sum[t] , c[1][x] = t , pushup(x) , t = x , x = fa[x];
+    }
 }
 void makeroot(int x)
 {
