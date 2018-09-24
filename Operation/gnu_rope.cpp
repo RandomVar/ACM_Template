@@ -22,8 +22,8 @@ T.substr(pos,x);//提取pos开始x个
 
 T.at(x)/[x];//访问第x个元素
 
-printf("%d\n",T[i]) //输出T[i]    
-cout<<T<<endl; //输出T；
+printf("%d\n",T[i]) //输出T[i]
+cout<<T<<endl;//输出T    
 
 /* 2018nowcoder多校3 https://www.nowcoder.com/acm/contest/141/C */
 #include <bits/stdc++.h>
@@ -33,15 +33,19 @@ using namespace std;
 const int maxn=1e5+10;
 rope<int> T;
 int n,m;
-int main() {
-    scanf("%d%d",&n,&m);
-    for (int i=1; i<=n; i++) T.push_back(i);
-    while (m--) {
-        int p,s;
-        scanf("%d%d",&p,&s);
-        p--;
-        T=T.substr(p,s) + T.substr(0,p) + T.substr(p+s,n-p-s); //洗牌后的顺序 中间 +前部 +后面
-    }
-    for (int i=0; i<n; i++) printf("%d ",T[i]);
-    return 0;
+int main()
+{
+    scanf("%d%d",&n,&m);
+    for(int i=1;u<=n;i++)
+     T.push_back(i);
+     while(m--)
+     {
+         int p,s;
+         scanf("%d%d",&p,&s);
+         p--;
+         T=T.substr(p,s)+T.substr(0,p)+T.substr(p+s,n-p-s);
+     }
+     for(int i=0;i<n;i++)
+      printf("%d ",T[i]);
+      return 0;
 }
