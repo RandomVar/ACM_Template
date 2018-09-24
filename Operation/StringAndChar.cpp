@@ -35,7 +35,8 @@ s=ss.str(); //s="5.222"
     char s[] = "a,b*c,d";
     const char *sep = ",*"; //可按多个字符来分割
     char *p;
-    p = strtok(s, sep);// 在第一次被调用的时间str是传入需要被切割字符串的首地址；在后面调用的时间传入NULL
+    p = strtok(s, sep);
+    // 在第一次被调用的时间str是传入需要被切割字符串的首地址；在后面调用的时间传入NULL
     while(p){
         printf("%s ", p);
         p = strtok(NULL, sep);
