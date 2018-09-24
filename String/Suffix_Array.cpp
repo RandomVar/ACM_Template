@@ -39,7 +39,8 @@ void build_sa(int m, int n)
         p = 1;
         x[sa[0]] = 0;
         for (int i = 1; i < n; i++)
-            x[sa[i]] = y[sa[i - 1]] == y[sa[i]] && y[sa[i - 1] + k] == y[sa[i] + k] ? p - 1 : p++;
+            x[sa[i]] = y[sa[i - 1]] == y[sa[i]] && 
+            y[sa[i - 1] + k] == y[sa[i] + k] ? p - 1 : p++;
         if (p >= n) break; //以后即使继续倍增，sa也不会改变，推出
         m = p;             //下次基数排序的最大值
     }

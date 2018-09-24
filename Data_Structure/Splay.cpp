@@ -15,7 +15,8 @@ struct Splay
         if (x)
         {
             Treavel(ch[x][0]);
-            printf("结点:%2d: 左儿子 %2d 右儿子 %2d 父结点 %2d size= %2d key= %2d\n", x, ch[x][0], ch[x][1], fa[x], sz[x], key[x]);
+            printf("结点:%2d: 左儿子 %2d 右儿子 %2d 父结点 %2d size= %2d key= %2d\n",
+             x, ch[x][0], ch[x][1], fa[x], sz[x], key[x]);
             Treavel(ch[x][1]);
         }
     }
