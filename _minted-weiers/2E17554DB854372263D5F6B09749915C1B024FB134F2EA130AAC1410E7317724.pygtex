@@ -1,0 +1,40 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/**upper\PYGZus{}bound **/}
+
+ \PYG{k}{while}\PYG{p}{(}\PYG{n}{l}\PYG{o}{\PYGZlt{}=}\PYG{n}{r}\PYG{p}{)}  
+ \PYG{p}{\PYGZob{}}
+   \PYG{k+kt}{int} \PYG{n}{mid}\PYG{o}{=}\PYG{p}{(}\PYG{n}{l}\PYG{o}{+}\PYG{n}{r}\PYG{p}{)}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{p}{;}
+   \PYG{k}{if}\PYG{p}{(}\PYG{n}{ok}\PYG{p}{)}  \PYG{n}{l}\PYG{o}{=}\PYG{n}{mid}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{;}
+   \PYG{k}{else}  \PYG{n}{r}\PYG{o}{=}\PYG{n}{mid}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{;}
+ \PYG{p}{\PYGZcb{}}
+  \PYG{k}{return} \PYG{n}{l}\PYG{p}{;}
+	 
+
+\PYG{c+cm}{/**lower\PYGZus{}bound **/}
+ \PYG{k+kt}{int} \PYG{n}{lb}\PYG{o}{=\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{ub}\PYG{o}{=}\PYG{n}{res}\PYG{p}{;}
+  \PYG{k}{while}\PYG{p}{(}\PYG{n}{ub}\PYG{o}{\PYGZhy{}}\PYG{n}{lb}\PYG{o}{\PYGZgt{}}\PYG{l+m+mi}{1}\PYG{p}{)}
+  \PYG{p}{\PYGZob{}}
+    \PYG{k+kt}{int} \PYG{n}{mid}\PYG{o}{=}\PYG{p}{(}\PYG{n}{lb}\PYG{o}{+}\PYG{n}{ub}\PYG{p}{)}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{p}{;}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{ok}\PYG{p}{)} \PYG{n}{ub}\PYG{o}{=}\PYG{n}{mid}\PYG{p}{;}
+    \PYG{k}{else} \PYG{n}{lb}\PYG{o}{=}\PYG{n}{mid}\PYG{p}{;}
+  \PYG{p}{\PYGZcb{}}
+  \PYG{k}{return} \PYG{n}{ub}\PYG{p}{;}
+
+\PYG{c+cm}{/*另一种好用的lower\PYGZus{}bound*/}
+\PYG{k+kt}{int} \PYG{n}{ans}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{k}{while}\PYG{p}{(}\PYG{n}{l}\PYG{o}{\PYGZlt{}=}\PYG{n}{r}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+  \PYG{k+kt}{int} \PYG{n}{mid}\PYG{o}{=}\PYG{p}{(}\PYG{n}{l}\PYG{o}{+}\PYG{n}{r}\PYG{p}{)}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{p}{;}
+  \PYG{k}{if}\PYG{p}{(}\PYG{n}{ok}\PYG{p}{)} \PYG{n}{l}\PYG{o}{=}\PYG{n}{mid}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{ans}\PYG{o}{=}\PYG{n}{mid}\PYG{p}{;}
+  \PYG{k}{else} \PYG{n}{r}\PYG{o}{=}\PYG{n}{mid}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\PYG{k}{return} \PYG{n}{ans}\PYG{p}{;}
+
+\PYG{c+cm}{/**浮点数二分*/}
+ \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{100}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)} 
+ \PYG{p}{\PYGZob{}}
+      \PYG{k+kt}{double} \PYG{n}{mid} \PYG{o}{=} \PYG{p}{(}\PYG{n}{l} \PYG{o}{+} \PYG{n}{r}\PYG{p}{)} \PYG{o}{/} \PYG{l+m+mf}{2.0}\PYG{p}{;}
+      \PYG{k}{if}\PYG{p}{(}\PYG{n}{check}\PYG{p}{(}\PYG{n}{mid}\PYG{p}{))} \PYG{n}{r} \PYG{o}{=} \PYG{n}{mid}\PYG{p}{;}
+      \PYG{k}{else} \PYG{n}{l} \PYG{o}{=} \PYG{n}{mid}\PYG{p}{;}
+  \PYG{p}{\PYGZcb{}}
+\end{Verbatim}

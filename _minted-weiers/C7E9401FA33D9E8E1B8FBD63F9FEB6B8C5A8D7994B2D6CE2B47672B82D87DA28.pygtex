@@ -1,0 +1,85 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/****AC自动机 HUD\PYGZhy{}2222****/}
+\PYG{c+cm}{/*以now节点结尾的后缀 与 root\PYGZhy{}fail[now]所表示的字符串 相同*/}
+\PYG{k}{const} \PYG{k+kt}{int} \PYG{n}{NUMA}\PYG{o}{=}\PYG{l+m+mi}{26}\PYG{p}{;}
+\PYG{k}{struct} \PYG{n}{trie}\PYG{p}{\PYGZob{}}
+    
+   \PYG{k+kt}{int} \PYG{n}{next}\PYG{p}{[}\PYG{n}{maxnode}\PYG{p}{][}\PYG{n}{NUMA}\PYG{p}{],}\PYG{n}{fail}\PYG{p}{[}\PYG{n}{maxnode}\PYG{p}{],}\PYG{n}{ed}\PYG{p}{[}\PYG{n}{maxnode}\PYG{p}{];}\PYG{c+c1}{//attention}
+   \PYG{k+kt}{int} \PYG{n}{root}\PYG{p}{,}\PYG{n}{cnt}\PYG{p}{;}
+   \PYG{k+kt}{int} \PYG{n+nf}{newnode}\PYG{p}{()\PYGZob{}}
+      \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{NUMA}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+        \PYG{n}{next}\PYG{p}{[}\PYG{n}{cnt}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{o}{=\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{;}
+      \PYG{n}{ed}\PYG{p}{[}\PYG{n}{cnt}\PYG{o}{++}\PYG{p}{]}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}
+      \PYG{k}{return} \PYG{n}{cnt}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{;}
+   \PYG{p}{\PYGZcb{}}
+   
+   \PYG{k+kt}{void} \PYG{n+nf}{init}\PYG{p}{()\PYGZob{}}
+      \PYG{n}{cnt}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}
+      \PYG{n}{root}\PYG{o}{=}\PYG{n}{newnode}\PYG{p}{();}
+   \PYG{p}{\PYGZcb{}}
+
+   \PYG{k+kt}{void} \PYG{n+nf}{inser}\PYG{p}{(}\PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{buf}\PYG{p}{)\PYGZob{}}
+     \PYG{k+kt}{int} \PYG{n}{len}\PYG{o}{=}\PYG{n}{strlen}\PYG{p}{(}\PYG{n}{buf}\PYG{p}{);}
+     \PYG{k+kt}{int} \PYG{n}{now}\PYG{o}{=}\PYG{n}{root}\PYG{p}{;}
+     \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{len}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)\PYGZob{}}
+         \PYG{k}{if}\PYG{p}{(}\PYG{n}{next}\PYG{p}{[}\PYG{n}{now}\PYG{p}{][}\PYG{n}{buf}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZhy{}}\PYG{l+s+sc}{\PYGZsq{}a\PYGZsq{}}\PYG{p}{]}\PYG{o}{==\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}
+             \PYG{n}{next}\PYG{p}{[}\PYG{n}{now}\PYG{p}{][}\PYG{n}{buf}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZhy{}}\PYG{l+s+sc}{\PYGZsq{}a\PYGZsq{}}\PYG{p}{]}\PYG{o}{=}\PYG{n}{newnode}\PYG{p}{();}
+         \PYG{n}{now}\PYG{o}{=}\PYG{n}{next}\PYG{p}{[}\PYG{n}{now}\PYG{p}{][}\PYG{n}{buf}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZhy{}}\PYG{l+s+sc}{\PYGZsq{}a\PYGZsq{}}\PYG{p}{];}
+     \PYG{p}{\PYGZcb{}}
+     \PYG{n}{ed}\PYG{p}{[}\PYG{n}{now}\PYG{p}{]}\PYG{o}{++}\PYG{p}{;}
+   \PYG{p}{\PYGZcb{}}
+
+   \PYG{k+kt}{void} \PYG{n+nf}{build}\PYG{p}{()\PYGZob{}}
+     \PYG{n}{queue}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{n}{que}\PYG{p}{;}
+     \PYG{n}{fail}\PYG{p}{[}\PYG{n}{root}\PYG{p}{]}\PYG{o}{=}\PYG{n}{root}\PYG{p}{;}
+     \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{NUMA}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)\PYGZob{}}
+        \PYG{k}{if}\PYG{p}{(}\PYG{n}{next}\PYG{p}{[}\PYG{n}{root}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{o}{==\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}
+             \PYG{n}{next}\PYG{p}{[}\PYG{n}{root}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{o}{=}\PYG{n}{root}\PYG{p}{;}
+        \PYG{k}{else}\PYG{p}{\PYGZob{}}
+            \PYG{n}{fail}\PYG{p}{[}\PYG{n}{next}\PYG{p}{[}\PYG{n}{root}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]]}\PYG{o}{=}\PYG{n}{root}\PYG{p}{;}
+            \PYG{n}{que}\PYG{p}{.}\PYG{n}{push}\PYG{p}{(}\PYG{n}{next}\PYG{p}{[}\PYG{n}{root}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]);}
+        \PYG{p}{\PYGZcb{}\PYGZcb{}}
+        \PYG{k}{while}\PYG{p}{(}\PYG{o}{!}\PYG{n}{que}\PYG{p}{.}\PYG{n}{empty}\PYG{p}{())\PYGZob{}}
+            \PYG{k+kt}{int} \PYG{n}{now}\PYG{o}{=}\PYG{n}{que}\PYG{p}{.}\PYG{n}{front}\PYG{p}{();}
+            \PYG{n}{que}\PYG{p}{.}\PYG{n}{pop}\PYG{p}{();}
+            \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{NUMA}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)\PYGZob{}}
+                \PYG{k}{if}\PYG{p}{(}\PYG{n}{next}\PYG{p}{[}\PYG{n}{now}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{o}{==\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}
+                    \PYG{n}{next}\PYG{p}{[}\PYG{n}{now}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{o}{=}\PYG{n}{next}\PYG{p}{[}\PYG{n}{fail}\PYG{p}{[}\PYG{n}{now}\PYG{p}{]][}\PYG{n}{i}\PYG{p}{];}
+                \PYG{k}{else}\PYG{p}{\PYGZob{}}
+                    \PYG{n}{fail}\PYG{p}{[}\PYG{n}{next}\PYG{p}{[}\PYG{n}{now}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]]}\PYG{o}{=}\PYG{n}{next}\PYG{p}{[}\PYG{n}{fail}\PYG{p}{[}\PYG{n}{now}\PYG{p}{]][}\PYG{n}{i}\PYG{p}{];}
+                    \PYG{n}{que}\PYG{p}{.}\PYG{n}{push}\PYG{p}{(}\PYG{n}{next}\PYG{p}{[}\PYG{n}{now}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]);}
+                \PYG{p}{\PYGZcb{}}
+            \PYG{p}{\PYGZcb{}}
+        \PYG{p}{\PYGZcb{}}
+     \PYG{p}{\PYGZcb{}}
+
+  \PYG{k+kt}{int} \PYG{n+nf}{query}\PYG{p}{(}\PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{buf}\PYG{p}{)\PYGZob{}}
+    \PYG{k+kt}{int} \PYG{n}{len}\PYG{o}{=}\PYG{n}{strlen}\PYG{p}{(}\PYG{n}{buf}\PYG{p}{);}
+    \PYG{k+kt}{int} \PYG{n}{now}\PYG{o}{=}\PYG{n}{root}\PYG{p}{;}
+    \PYG{k+kt}{int} \PYG{n}{res}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{len}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)\PYGZob{}}
+        \PYG{n}{now}\PYG{o}{=}\PYG{n}{next}\PYG{p}{[}\PYG{n}{now}\PYG{p}{][}\PYG{n}{buf}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZhy{}}\PYG{l+s+sc}{\PYGZsq{}a\PYGZsq{}}\PYG{p}{];}
+        \PYG{k+kt}{int} \PYG{n}{temp}\PYG{o}{=}\PYG{n}{now}\PYG{p}{;}
+        \PYG{k}{while}\PYG{p}{(}\PYG{n}{temp}\PYG{o}{!=}\PYG{n}{root}\PYG{p}{)\PYGZob{}}
+            \PYG{n}{res}\PYG{o}{+=}\PYG{n}{ed}\PYG{p}{[}\PYG{n}{temp}\PYG{p}{];}
+            \PYG{n}{ed}\PYG{p}{[}\PYG{n}{temp}\PYG{p}{]}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}
+            \PYG{n}{temp}\PYG{o}{=}\PYG{n}{fail}\PYG{p}{[}\PYG{n}{temp}\PYG{p}{];}
+        \PYG{p}{\PYGZcb{}}
+    \PYG{p}{\PYGZcb{}}
+  \PYG{k}{return} \PYG{n}{res}\PYG{p}{;}
+  \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\PYG{k+kt}{char} \PYG{n}{buf}\PYG{p}{[}\PYG{n}{maxn}\PYG{p}{];}
+\PYG{n}{trie} \PYG{n}{ac}\PYG{p}{;}
+\PYG{k+kt}{int} \PYG{n+nf}{main}\PYG{p}{()\PYGZob{}}
+    \PYG{k+kt}{int} \PYG{n}{n}\PYG{p}{;}
+    \PYG{n}{cin}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{n}{n}\PYG{p}{;}
+    \PYG{n}{ac}\PYG{p}{.}\PYG{n}{init}\PYG{p}{();}
+    \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{n}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+        \PYG{n}{cin}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{n}{buf}\PYG{p}{,}\PYG{n}{ac}\PYG{p}{.}\PYG{n}{inser}\PYG{p}{(}\PYG{n}{buf}\PYG{p}{);}
+    \PYG{n}{ac}\PYG{p}{.}\PYG{n}{build}\PYG{p}{();}
+    \PYG{n}{cin}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{n}{buf}\PYG{p}{;}
+    \PYG{n}{cout}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{n}{ac}\PYG{p}{.}\PYG{n}{query}\PYG{p}{(}\PYG{n}{buf}\PYG{p}{)}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{n}{endl}\PYG{p}{;}
+\PYG{k}{return} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

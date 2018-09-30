@@ -1,0 +1,53 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{ll} \PYG{n+nf}{gcd}\PYG{p}{(}\PYG{n}{ll} \PYG{n}{a}\PYG{p}{,}\PYG{n}{ll} \PYG{n}{b}\PYG{p}{)\PYGZob{}}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{a} \PYG{o}{\PYGZlt{}} \PYG{n}{b}\PYG{p}{)}
+         \PYG{n}{swap}\PYG{p}{(}\PYG{n}{a}\PYG{p}{,}\PYG{n}{b}\PYG{p}{);}
+    \PYG{k}{while}\PYG{p}{(}\PYG{n}{a}\PYG{o}{\PYGZpc{}}\PYG{n}{b}\PYG{p}{)\PYGZob{}}
+        \PYG{n}{ll} \PYG{n}{r} \PYG{o}{=} \PYG{n}{a} \PYG{o}{\PYGZpc{}} \PYG{n}{b}\PYG{p}{;}
+        \PYG{n}{a} \PYG{o}{=} \PYG{n}{b}\PYG{p}{;}
+        \PYG{n}{b} \PYG{o}{=} \PYG{n}{r}\PYG{p}{;}
+     \PYG{p}{\PYGZcb{}}
+   \PYG{k}{return} \PYG{n}{b}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+cm}{/*求ax+by=c的xy 其中c\PYGZpc{}gcd(a,b)==0时才有解 }
+\PYG{c+cm}{解出的为特解x0,y0 */}
+\PYG{n}{ll} \PYG{n+nf}{ex\PYGZus{}gcd}\PYG{p}{(}\PYG{n}{ll} \PYG{n}{a}\PYG{p}{,}\PYG{n}{ll} \PYG{n}{b}\PYG{p}{,}\PYG{n}{ll} \PYG{o}{\PYGZam{}}\PYG{n}{x}\PYG{p}{,}\PYG{n}{ll} \PYG{o}{\PYGZam{}}\PYG{n}{y}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{a}\PYG{o}{==}\PYG{l+m+mi}{0}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{n}{b}\PYG{o}{==}\PYG{l+m+mi}{0}\PYG{p}{)} \PYG{k}{return} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{;}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{b}\PYG{o}{==}\PYG{l+m+mi}{0}\PYG{p}{)\PYGZob{}}\PYG{n}{x}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{n}{y}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{k}{return} \PYG{n}{a}\PYG{p}{;\PYGZcb{}}
+    \PYG{n}{ll} \PYG{n}{d}\PYG{o}{=}\PYG{n}{ex\PYGZus{}gcd}\PYG{p}{(}\PYG{n}{b}\PYG{p}{,}\PYG{n}{a}\PYG{o}{\PYGZpc{}}\PYG{n}{b}\PYG{p}{,}\PYG{n}{y}\PYG{p}{,}\PYG{n}{x}\PYG{p}{);}
+    \PYG{n}{y}\PYG{o}{\PYGZhy{}=}\PYG{n}{a}\PYG{o}{/}\PYG{n}{b}\PYG{o}{*}\PYG{n}{x}\PYG{p}{;}
+    \PYG{k}{return} \PYG{n}{d}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+cm}{/*求最小正整数解x;若无解返回false*/}
+\PYG{c+cm}{/*已求出特解 x0,y0 设t=c/d,则通解为 x=t*x0+b/d*k; y=t*y0\PYGZhy{}a/d*k; k为任意整数}
+\PYG{c+cm}{最小正整数解 x=x0*t; x=(x\PYGZpc{}s+s)\PYGZpc{}s;*/}
+  \PYG{k+kt}{bool} \PYG{n+nf}{min\PYGZus{}x}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{a}\PYG{p}{,}\PYG{k+kt}{int} \PYG{n}{b}\PYG{p}{,}\PYG{k+kt}{int} \PYG{o}{\PYGZam{}}\PYG{n}{x}\PYG{p}{,}\PYG{k+kt}{int} \PYG{o}{\PYGZam{}}\PYG{n}{y}\PYG{p}{,}\PYG{k+kt}{int} \PYG{n}{c}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k+kt}{int} \PYG{n}{d}\PYG{o}{=}\PYG{n}{ex\PYGZus{}gcd}\PYG{p}{(}\PYG{n}{a}\PYG{p}{,}\PYG{n}{b}\PYG{p}{,}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{);}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{c}\PYG{o}{\PYGZpc{}}\PYG{n}{d}\PYG{p}{)} \PYG{k}{return} \PYG{n+nb}{false}\PYG{p}{;}
+    \PYG{n}{x}\PYG{o}{=}\PYG{n}{x}\PYG{o}{*}\PYG{n}{c}\PYG{o}{/}\PYG{n}{d}\PYG{p}{;}
+    \PYG{k+kt}{int} \PYG{n}{s}\PYG{o}{=}\PYG{n}{b}\PYG{o}{/}\PYG{n}{d}\PYG{p}{;}
+    \PYG{n}{s}\PYG{o}{=}\PYG{n}{s}\PYG{o}{\PYGZgt{}}\PYG{l+m+mi}{0}\PYG{o}{?}\PYG{n+nl}{s}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{*}\PYG{n}{s}\PYG{p}{;}
+    \PYG{n}{x}\PYG{o}{=}\PYG{p}{(}\PYG{n}{x}\PYG{o}{\PYGZpc{}}\PYG{n}{s}\PYG{o}{+}\PYG{n}{s}\PYG{p}{)}\PYG{o}{\PYGZpc{}}\PYG{n}{s}\PYG{p}{;}
+    \PYG{n}{y}\PYG{o}{=}\PYG{p}{(}\PYG{n}{c}\PYG{o}{\PYGZhy{}}\PYG{n}{a}\PYG{o}{*}\PYG{n}{x}\PYG{p}{)}\PYG{o}{/}\PYG{n}{b}\PYG{p}{;}
+    \PYG{k}{return} \PYG{n+nb}{true}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+cm}{/****费马小定理求逆元****/}
+\PYG{c+cm}{/*mod为素数,而且a和m互质 a\PYGZca{}(p\PYGZhy{}1)=1(mod p) */}
+\PYG{n}{ll} \PYG{n+nf}{inv}\PYG{p}{(}\PYG{n}{ll} \PYG{n}{a}\PYG{p}{,}\PYG{n}{ll} \PYG{n}{mod}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{k}{return} \PYG{n}{quickmod}\PYG{p}{(}\PYG{n}{a}\PYG{p}{,}\PYG{n}{mod}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{mod}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+cm}{/*线性递推求逆元*/}
+\PYG{k+kt}{void} \PYG{n+nf}{init}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+    \PYG{n}{inv}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;}
+   \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{2}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mf}{1e6}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+   \PYG{n}{inv}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{=}\PYG{n}{inv}\PYG{p}{[}\PYG{n}{mod}\PYG{o}{\PYGZpc{}}\PYG{n}{i}\PYG{p}{]}\PYG{o}{*}\PYG{p}{(}\PYG{n}{mod}\PYG{o}{\PYGZhy{}}\PYG{n}{mod}\PYG{o}{/}\PYG{n}{i}\PYG{p}{)}\PYG{o}{\PYGZpc{}}\PYG{n}{mod}\PYG{p}{;}
+
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

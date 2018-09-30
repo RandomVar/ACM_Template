@@ -1,0 +1,119 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/* hash */}
+\PYG{c+cm}{/**备选素数 1572869, 3145739, 6291469, 12582917, 25165843, 50331653*/}
+\PYG{k}{const} \PYG{k+kt}{int} \PYG{n}{maxn} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}1e5\PYGZdq{}}\PYG{p}{;}
+\PYG{k}{const} \PYG{k+kt}{int} \PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{31}\PYG{p}{;}
+\PYG{n}{ull} \PYG{n}{h}\PYG{p}{[}\PYG{n}{maxn}\PYG{p}{];}
+\PYG{n}{ull} \PYG{n}{base}\PYG{p}{[}\PYG{n}{maxn}\PYG{p}{];}
+\PYG{k}{typedef} \PYG{n}{pair}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{p}{,}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}} \PYG{n}{P}\PYG{p}{;}
+\PYG{k+kt}{void} \PYG{n+nf}{init}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+  \PYG{n}{base}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;}
+  \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{maxn}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+    \PYG{n}{base}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{=}\PYG{n}{base}\PYG{p}{[}\PYG{n}{i}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{*}\PYG{n}{seed}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\PYG{n}{ull} \PYG{n+nf}{str\PYGZus{}hash}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{l}\PYG{p}{,}\PYG{k+kt}{int} \PYG{n}{r}\PYG{p}{)\PYGZob{}}
+  \PYG{k}{return} \PYG{n}{h}\PYG{p}{[}\PYG{n}{r}\PYG{p}{]}\PYG{o}{\PYGZhy{}}\PYG{n}{h}\PYG{p}{[}\PYG{n}{l}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{*}\PYG{n}{base}\PYG{p}{[}\PYG{n}{r}\PYG{o}{\PYGZhy{}}\PYG{n}{l}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{];}
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{void} \PYG{n+nf}{Hash}\PYG{p}{()}
+ \PYG{p}{\PYGZob{}}
+   \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{len}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+      \PYG{n}{h}\PYG{p}{[}\PYG{n}{i}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{=}\PYG{n}{h}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{*}\PYG{n}{seed}\PYG{o}{+}\PYG{n}{s}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZhy{}}\PYG{l+s+sc}{\PYGZsq{}a\PYGZsq{}}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{;}
+  \PYG{p}{\PYGZcb{}}
+
+  \PYG{c+cm}{/* 随机数双哈希（csl）Gym101808B */}
+  \PYG{n}{map}\PYG{o}{\PYGZlt{}}\PYG{n}{pair}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{p}{,}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{p}{,}\PYG{n}{pair}\PYG{o}{\PYGZlt{}}\PYG{n}{ull}\PYG{p}{,}\PYG{n}{ull}\PYG{o}{\PYGZgt{}} \PYG{n}{dic}\PYG{p}{;}
+
+  \PYG{k+kr}{inline} \PYG{n}{pair}\PYG{o}{\PYGZlt{}}\PYG{n}{ull}\PYG{p}{,}\PYG{n}{ull}\PYG{o}{\PYGZgt{}}\PYG{n}{gethash}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{x}\PYG{p}{,}\PYG{k+kt}{int} \PYG{n}{y}\PYG{p}{)}
+  \PYG{p}{\PYGZob{}}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{x}\PYG{o}{\PYGZgt{}}\PYG{n}{y}\PYG{p}{)} \PYG{n}{swap}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{);}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{dic}\PYG{p}{.}\PYG{n}{find}\PYG{p}{(\PYGZob{}}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{\PYGZcb{})}\PYG{o}{!=}\PYG{n}{dic}\PYG{p}{.}\PYG{n}{end}\PYG{p}{())}
+        \PYG{k}{return} \PYG{n}{dic}\PYG{p}{[\PYGZob{}}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{\PYGZcb{}];}
+    \PYG{n}{ull} \PYG{n}{h1}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;}
+    \PYG{n}{ull} \PYG{n}{h2}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;}
+    \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{l+m+mi}{5}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{n}{h1}\PYG{o}{*=}\PYG{n}{rand}\PYG{p}{();}
+    \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{l+m+mi}{5}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{n}{h2}\PYG{o}{*=}\PYG{n}{rand}\PYG{p}{();}\PYG{c+c1}{//用随机数hash}
+    \PYG{k}{return} \PYG{n}{dic}\PYG{p}{[\PYGZob{}}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{\PYGZcb{}]}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{n}{h1}\PYG{p}{,}\PYG{n}{h2}\PYG{p}{\PYGZcb{};}
+  \PYG{p}{\PYGZcb{}}
+
+  \PYG{n}{map}\PYG{o}{\PYGZlt{}}\PYG{n}{pair}\PYG{o}{\PYGZlt{}}\PYG{n}{ull}\PYG{p}{,}\PYG{n}{ulll}\PYG{o}{\PYGZgt{}}\PYG{p}{,}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}} \PYG{n}{cnt}\PYG{p}{[}\PYG{n}{maxn}\PYG{p}{];}
+
+   \PYG{n}{dic}\PYG{p}{.}\PYG{n}{clear}\PYG{p}{();}
+  \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{n}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+    \PYG{n}{a}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{=}\PYG{n}{gethash}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{);}
+
+\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{n}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+  \PYG{n}{ull} \PYG{n}{hash1}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{hash2}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}
+  \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j}\PYG{o}{=}\PYG{n}{i}\PYG{p}{;}\PYG{n}{j}\PYG{o}{\PYGZlt{}}\PYG{n}{n}\PYG{p}{;}\PYG{n}{j}\PYG{o}{++}\PYG{p}{)}
+  \PYG{p}{\PYGZob{}}
+    \PYG{n}{hash1}\PYG{o}{+=}\PYG{n}{a}\PYG{p}{[}\PYG{n}{j}\PYG{p}{].}\PYG{n}{first}\PYG{p}{;}\PYG{n}{hash2}\PYG{o}{+=}\PYG{n}{a}\PYG{p}{[}\PYG{n}{j}\PYG{p}{].}\PYG{n}{second}\PYG{p}{;}
+   \PYG{n}{ans}\PYG{o}{+=}\PYG{n}{cnt}\PYG{p}{[}\PYG{n}{j}\PYG{o}{\PYGZhy{}}\PYG{n}{i}\PYG{p}{][\PYGZob{}}\PYG{n}{hash1}\PYG{p}{,}\PYG{n}{hash2}\PYG{p}{\PYGZcb{}];}
+    \PYG{n}{cnt}\PYG{p}{[}\PYG{n}{j}\PYG{o}{\PYGZhy{}}\PYG{n}{i}\PYG{p}{][\PYGZob{}}\PYG{n}{hash1}\PYG{p}{,}\PYG{n}{hash2}\PYG{p}{\PYGZcb{}]}\PYG{o}{++}\PYG{p}{;}\PYG{c+c1}{//长度相同的放在一个map}
+  \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+cm}{/* 双哈希（csl）*/}
+
+\PYG{k}{const} \PYG{k+kt}{int} \PYG{n}{seed1}\PYG{o}{=} \PYG{l+s}{\PYGZdq{}19260817\PYGZdq{}} \PYG{p}{;}
+\PYG{k}{const} \PYG{k+kt}{int} \PYG{n}{mod1}\PYG{o}{=} \PYG{l+s}{\PYGZdq{}1e9+7\PYGZdq{}}\PYG{p}{;}
+\PYG{k}{const} \PYG{k+kt}{int} \PYG{n}{seed2}\PYG{o}{=} \PYG{l+s}{\PYGZdq{}23333333\PYGZdq{}}\PYG{p}{;}
+\PYG{k}{const} \PYG{k+kt}{int} \PYG{n}{mod2}\PYG{o}{=} \PYG{l+s}{\PYGZdq{}1e9+9\PYGZdq{}} \PYG{p}{;}
+\PYG{k+kt}{int} \PYG{n}{base1}\PYG{p}{[}\PYG{n}{maxn}\PYG{p}{],}\PYG{n}{base2}\PYG{p}{[}\PYG{n}{maxn}\PYG{p}{];}
+
+\PYG{n}{map}\PYG{o}{\PYGZlt{}}\PYG{n}{pair}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{p}{,}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{p}{,}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}} \PYG{n}{dic}\PYG{p}{;}
+\PYG{k+kr}{inline} \PYG{k+kt}{int} \PYG{n+nf}{getid}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{x}\PYG{p}{,}\PYG{k+kt}{int} \PYG{n}{y}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+  \PYG{k}{if}\PYG{p}{(}\PYG{n}{x}\PYG{o}{\PYGZgt{}}\PYG{n}{y}\PYG{p}{)} \PYG{n}{swap}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{);}
+  \PYG{k}{if}\PYG{p}{(}\PYG{n}{dic}\PYG{p}{[\PYGZob{}}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{\PYGZcb{}])}  \PYG{k}{return} \PYG{n}{dic}\PYG{p}{[\PYGZob{}}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{\PYGZcb{}];}
+  \PYG{k}{return} \PYG{n}{dic}\PYG{p}{[\PYGZob{}}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{\PYGZcb{}]}\PYG{o}{=}\PYG{n}{dic}\PYG{p}{.}\PYG{n}{size}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void} \PYG{n+nf}{init}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{n}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+  \PYG{n}{base1}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{base2}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;}
+  \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{n}{n}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+    \PYG{n}{base1}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{1LL}\PYG{o}{*}\PYG{n}{base1}\PYG{p}{[}\PYG{n}{i}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{*}\PYG{n}{seed1}\PYG{p}{);}
+    \PYG{n}{base2}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{1LL}\PYG{o}{*}\PYG{n}{base2}\PYG{p}{[}\PYG{n}{i}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{*}\PYG{n}{seed2}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{dic}\PYG{p}{.}\PYG{n}{clear}\PYG{p}{();}
+\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{n}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+    \PYG{n}{a}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{=}\PYG{n}{getid}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{);}
+
+\PYG{n}{map}\PYG{o}{\PYGZlt{}}\PYG{n}{pair}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{p}{,}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{p}{,}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}} \PYG{n}{cnt}\PYG{p}{[}\PYG{n}{maxn}\PYG{p}{];}
+\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{n}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+  \PYG{k+kt}{int} \PYG{n}{sum1}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{sum2}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}
+  \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j}\PYG{o}{=}\PYG{n}{i}\PYG{p}{;}\PYG{n}{j}\PYG{o}{\PYGZlt{}}\PYG{n}{n}\PYG{p}{;}\PYG{n}{j}\PYG{o}{++}\PYG{p}{)}
+  \PYG{p}{\PYGZob{}}
+    \PYG{n}{sum1}\PYG{o}{=}\PYG{p}{(}\PYG{n}{sum1}\PYG{o}{+}\PYG{n}{base1}\PYG{p}{[}\PYG{n}{a}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]])}\PYG{o}{\PYGZpc{}}\PYG{n}{mod1}\PYG{p}{;}
+    \PYG{n}{sum2}\PYG{o}{=}\PYG{p}{(}\PYG{n}{sum2}\PYG{o}{+}\PYG{n}{base2}\PYG{p}{[}\PYG{n}{a}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]])}\PYG{o}{\PYGZpc{}}\PYG{n}{mod2}\PYG{p}{;}
+     \PYG{n}{ans}\PYG{o}{+=}\PYG{n}{cnt}\PYG{p}{[}\PYG{n}{j}\PYG{o}{\PYGZhy{}}\PYG{n}{i}\PYG{p}{][\PYGZob{}}\PYG{n}{sum1}\PYG{p}{,}\PYG{n}{sum2}\PYG{p}{\PYGZcb{}];}
+    \PYG{n}{cnt}\PYG{p}{[}\PYG{n}{j}\PYG{o}{\PYGZhy{}}\PYG{n}{i}\PYG{p}{][\PYGZob{}}\PYG{n}{sum1}\PYG{p}{,}\PYG{n}{sum2}\PYG{p}{\PYGZcb{}]}\PYG{o}{++}\PYG{p}{;}\PYG{c+c1}{//长度相同的放在一个map}
+  \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+cm}{/*PROVIDE BY CSL**/}
+\PYG{k}{typedef} \PYG{k+kt}{unsigned} \PYG{k+kt}{long} \PYG{k+kt}{long} \PYG{n}{ull}\PYG{p}{;}
+\PYG{k}{const} \PYG{n}{ull} \PYG{n}{Seed\PYGZus{}Pool}\PYG{p}{[]} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+m+mi}{146527}\PYG{p}{,} \PYG{l+m+mi}{19260817}\PYG{p}{\PYGZcb{};}
+\PYG{k}{const} \PYG{n}{ull} \PYG{n}{Mod\PYGZus{}Pool}\PYG{p}{[]} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+m+mi}{1000000009}\PYG{p}{,} \PYG{l+m+mi}{998244353}\PYG{p}{\PYGZcb{};}
+\PYG{k}{struct} \PYG{n}{Hash}
+\PYG{p}{\PYGZob{}}
+    \PYG{n}{ull} \PYG{n}{SEED}\PYG{p}{,} \PYG{n}{MOD}\PYG{p}{;}
+    \PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{ull}\PYG{o}{\PYGZgt{}} \PYG{n}{p}\PYG{p}{,} \PYG{n}{h}\PYG{p}{;}
+    \PYG{n}{Hash}\PYG{p}{()} \PYG{p}{\PYGZob{}\PYGZcb{}}
+    \PYG{n}{Hash}\PYG{p}{(}\PYG{k}{const} \PYG{n}{string}\PYG{o}{\PYGZam{}} \PYG{n}{s}\PYG{p}{,} \PYG{k}{const} \PYG{k+kt}{int}\PYG{o}{\PYGZam{}} \PYG{n}{seed\PYGZus{}index}\PYG{p}{,} \PYG{k}{const} \PYG{k+kt}{int}\PYG{o}{\PYGZam{}} \PYG{n}{mod\PYGZus{}index}\PYG{p}{)}
+    \PYG{p}{\PYGZob{}}
+        \PYG{n}{SEED} \PYG{o}{=} \PYG{n}{Seed\PYGZus{}Pool}\PYG{p}{[}\PYG{n}{seed\PYGZus{}index}\PYG{p}{];}
+        \PYG{n}{MOD} \PYG{o}{=} \PYG{n}{Mod\PYGZus{}Pool}\PYG{p}{[}\PYG{n}{mod\PYGZus{}index}\PYG{p}{];}
+        \PYG{k+kt}{int} \PYG{n}{n} \PYG{o}{=} \PYG{n}{s}\PYG{p}{.}\PYG{n}{length}\PYG{p}{();}
+        \PYG{n}{p}\PYG{p}{.}\PYG{n}{resize}\PYG{p}{(}\PYG{n}{n} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{),} \PYG{n}{h}\PYG{p}{.}\PYG{n}{resize}\PYG{p}{(}\PYG{n}{n} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{);}
+        \PYG{n}{p}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;}
+        \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}=} \PYG{n}{n}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{n}{p}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{n}{p}\PYG{p}{[}\PYG{n}{i} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{*} \PYG{n}{SEED} \PYG{o}{\PYGZpc{}} \PYG{n}{MOD}\PYG{p}{;}
+        \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}=} \PYG{n}{n}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{n}{h}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{p}{(}\PYG{n}{h}\PYG{p}{[}\PYG{n}{i} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{*} \PYG{n}{SEED} \PYG{o}{\PYGZpc{}} \PYG{n}{MOD} \PYG{o}{+} \PYG{n}{s}\PYG{p}{[}\PYG{n}{i} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{])} \PYG{o}{\PYGZpc{}} \PYG{n}{MOD}\PYG{p}{;}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{n}{ull} \PYG{n}{get}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{l}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{r}\PYG{p}{)} \PYG{p}{\PYGZob{}} \PYG{k}{return} \PYG{p}{(}\PYG{n}{h}\PYG{p}{[}\PYG{n}{r}\PYG{p}{]} \PYG{o}{\PYGZhy{}} \PYG{n}{h}\PYG{p}{[}\PYG{n}{l}\PYG{p}{]} \PYG{o}{*} \PYG{n}{p}\PYG{p}{[}\PYG{n}{r} \PYG{o}{\PYGZhy{}} \PYG{n}{l}\PYG{p}{]} \PYG{o}{\PYGZpc{}} \PYG{n}{MOD} \PYG{o}{+} \PYG{n}{MOD}\PYG{p}{)} \PYG{o}{\PYGZpc{}} \PYG{n}{MOD}\PYG{p}{;} \PYG{p}{\PYGZcb{}}
+    \PYG{n}{ull} \PYG{n}{substr}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{l}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{m}\PYG{p}{)} \PYG{p}{\PYGZob{}} \PYG{k}{return} \PYG{n}{get}\PYG{p}{(}\PYG{n}{l}\PYG{p}{,} \PYG{n}{l} \PYG{o}{+} \PYG{n}{m}\PYG{p}{);} \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

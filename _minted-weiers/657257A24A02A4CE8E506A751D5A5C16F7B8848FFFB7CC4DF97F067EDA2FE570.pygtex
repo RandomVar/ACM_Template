@@ -1,0 +1,80 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/*后缀数组 DA倍增算法 o(n*log(n))*/}
+\PYG{k}{const} \PYG{k+kt}{int} \PYG{n}{maxn} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}Edit\PYGZdq{}}\PYG{p}{;}
+\PYG{k+kt}{char} \PYG{n}{s}\PYG{p}{[}\PYG{n}{maxn}\PYG{p}{];}
+\PYG{k+kt}{int} \PYG{n}{sa}\PYG{p}{[}\PYG{n}{maxn}\PYG{p}{],} \PYG{n}{t}\PYG{p}{[}\PYG{n}{maxn}\PYG{p}{],} \PYG{n}{t2}\PYG{p}{[}\PYG{n}{maxn}\PYG{p}{],} \PYG{n}{c}\PYG{p}{[}\PYG{n}{maxn}\PYG{p}{],} \PYG{n}{ran}\PYG{p}{[}\PYG{n}{maxn}\PYG{p}{],} \PYG{n}{height}\PYG{p}{[}\PYG{n}{maxn}\PYG{p}{];}
+\PYG{c+cm}{/*}
+\PYG{c+cm}{sa为后缀数组，保存sa[第i个名次]=是i开头后缀}
+\PYG{c+cm}{rank为名次数组rank[i开头的后缀]=的名次}
+\PYG{c+cm}{height为相邻两个后缀的最长公共前缀}
+\PYG{c+cm}{*/}
+\PYG{c+c1}{//n为字符串的长度,字符集的值为0\PYGZti{}m\PYGZhy{}1}
+\PYG{c+cm}{/*}
+\PYG{c+cm}{build(128,s.size())}
+\PYG{c+cm}{height[ 2\PYGZhy{}s.size() ] 有效}
+\PYG{c+cm}{height[i]为以sa[i\PYGZhy{}1]和sa[i]开头的后缀 的最长公共前缀}
+\PYG{c+cm}{*/}
+\PYG{k+kt}{void} \PYG{n+nf}{build\PYGZus{}sa}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{m}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{n}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{n}{n}\PYG{o}{++}\PYG{p}{;}
+    \PYG{k+kt}{int} \PYG{o}{*}\PYG{n}{x} \PYG{o}{=} \PYG{n}{t}\PYG{p}{,} \PYG{o}{*}\PYG{n}{y} \PYG{o}{=} \PYG{n}{t2}\PYG{p}{;}
+    \PYG{c+c1}{//基数排序}
+    \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{m}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{n}{c}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{n}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{n}{c}\PYG{p}{[}\PYG{n}{x}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{n}{s}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]]}\PYG{o}{++}\PYG{p}{;}
+    \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{m}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{n}{c}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{+=} \PYG{n}{c}\PYG{p}{[}\PYG{n}{i} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{];}
+    \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{n}{n} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{;} \PYG{o}{\PYGZti{}}\PYG{n}{i}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{p}{)} \PYG{n}{sa}\PYG{p}{[}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{n}{c}\PYG{p}{[}\PYG{n}{x}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]]]} \PYG{o}{=} \PYG{n}{i}\PYG{p}{;}
+    \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{k} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{k} \PYG{o}{\PYGZlt{}=} \PYG{n}{n}\PYG{p}{;} \PYG{n}{k} \PYG{o}{\PYGZlt{}\PYGZlt{}=} \PYG{l+m+mi}{1}\PYG{p}{)}
+    \PYG{p}{\PYGZob{}}
+        \PYG{c+c1}{//直接利用sa数组排序第二关键字}
+        \PYG{k+kt}{int} \PYG{n}{p} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+        \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{n}{n} \PYG{o}{\PYGZhy{}} \PYG{n}{k}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{n}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{n}{y}\PYG{p}{[}\PYG{n}{p}\PYG{o}{++}\PYG{p}{]} \PYG{o}{=} \PYG{n}{i}\PYG{p}{;}
+        \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{n}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+            \PYG{k}{if} \PYG{p}{(}\PYG{n}{sa}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{\PYGZgt{}=} \PYG{n}{k}\PYG{p}{)} \PYG{n}{y}\PYG{p}{[}\PYG{n}{p}\PYG{o}{++}\PYG{p}{]} \PYG{o}{=} \PYG{n}{sa}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{\PYGZhy{}} \PYG{n}{k}\PYG{p}{;}
+        \PYG{c+c1}{//基数排序第一关键字}
+        \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{m}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{n}{c}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+        \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{n}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{n}{c}\PYG{p}{[}\PYG{n}{x}\PYG{p}{[}\PYG{n}{y}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]]]}\PYG{o}{++}\PYG{p}{;}
+        \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{m}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{n}{c}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{+=} \PYG{n}{c}\PYG{p}{[}\PYG{n}{i} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{];}
+        \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{n}{n} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{;} \PYG{o}{\PYGZti{}}\PYG{n}{i}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{p}{)} \PYG{n}{sa}\PYG{p}{[}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{n}{c}\PYG{p}{[}\PYG{n}{x}\PYG{p}{[}\PYG{n}{y}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]]]]} \PYG{o}{=} \PYG{n}{y}\PYG{p}{[}\PYG{n}{i}\PYG{p}{];}
+        \PYG{c+c1}{//根据sa和y数组计算新的x数组}
+        \PYG{n}{swap}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{);}
+        \PYG{n}{p} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;}
+        \PYG{n}{x}\PYG{p}{[}\PYG{n}{sa}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]]} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+        \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{n}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+            \PYG{n}{x}\PYG{p}{[}\PYG{n}{sa}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]]} \PYG{o}{=} \PYG{n}{y}\PYG{p}{[}\PYG{n}{sa}\PYG{p}{[}\PYG{n}{i} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{]]} \PYG{o}{==} \PYG{n}{y}\PYG{p}{[}\PYG{n}{sa}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]]} \PYG{o}{\PYGZam{}\PYGZam{}} 
+            \PYG{n}{y}\PYG{p}{[}\PYG{n}{sa}\PYG{p}{[}\PYG{n}{i} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{+} \PYG{n}{k}\PYG{p}{]} \PYG{o}{==} \PYG{n}{y}\PYG{p}{[}\PYG{n}{sa}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{+} \PYG{n}{k}\PYG{p}{]} \PYG{o}{?} \PYG{n}{p} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1} \PYG{o}{:} \PYG{n}{p}\PYG{o}{++}\PYG{p}{;}
+        \PYG{k}{if} \PYG{p}{(}\PYG{n}{p} \PYG{o}{\PYGZgt{}=} \PYG{n}{n}\PYG{p}{)} \PYG{k}{break}\PYG{p}{;} \PYG{c+c1}{//以后即使继续倍增，sa也不会改变，推出}
+        \PYG{n}{m} \PYG{o}{=} \PYG{n}{p}\PYG{p}{;}             \PYG{c+c1}{//下次基数排序的最大值}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{n}{n}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{p}{;}
+    \PYG{k+kt}{int} \PYG{n}{k} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}=} \PYG{n}{n}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{n}{ran}\PYG{p}{[}\PYG{n}{sa}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]]} \PYG{o}{=} \PYG{n}{i}\PYG{p}{;}
+    \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{n}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+    \PYG{p}{\PYGZob{}}
+        \PYG{k}{if} \PYG{p}{(}\PYG{n}{k}\PYG{p}{)} \PYG{n}{k}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{p}{;}
+        \PYG{k+kt}{int} \PYG{n}{j} \PYG{o}{=} \PYG{n}{sa}\PYG{p}{[}\PYG{n}{ran}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{];}
+        \PYG{k}{while} \PYG{p}{(}\PYG{n}{s}\PYG{p}{[}\PYG{n}{i} \PYG{o}{+} \PYG{n}{k}\PYG{p}{]} \PYG{o}{==} \PYG{n}{s}\PYG{p}{[}\PYG{n}{j} \PYG{o}{+} \PYG{n}{k}\PYG{p}{])} \PYG{n}{k}\PYG{o}{++}\PYG{p}{;}
+        \PYG{n}{height}\PYG{p}{[}\PYG{n}{ran}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]]} \PYG{o}{=} \PYG{n}{k}\PYG{p}{;}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{int} \PYG{n}{dp}\PYG{p}{[}\PYG{n}{maxn}\PYG{p}{][}\PYG{l+m+mi}{30}\PYG{p}{];}
+\PYG{k+kt}{void} \PYG{n+nf}{initrmq}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{n}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}=} \PYG{n}{n}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+        \PYG{n}{dp}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{=} \PYG{n}{height}\PYG{p}{[}\PYG{n}{i}\PYG{p}{];}
+    \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;} \PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{j}\PYG{p}{)} \PYG{o}{\PYGZlt{}=} \PYG{n}{n}\PYG{p}{;} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)}
+        \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i} \PYG{o}{+} \PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{j}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1} \PYG{o}{\PYGZlt{}=} \PYG{n}{n}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+            \PYG{n}{dp}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{n}{j}\PYG{p}{]} \PYG{o}{=} \PYG{n}{min}\PYG{p}{(}\PYG{n}{dp}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{n}{j} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{],} \PYG{n}{dp}\PYG{p}{[}\PYG{n}{i} \PYG{o}{+} \PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{p}{(}\PYG{n}{j} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{))][}\PYG{n}{j} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{]);}
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{int} \PYG{n+nf}{rmq}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{l}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{r}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k+kt}{int} \PYG{n}{k} \PYG{o}{=} \PYG{l+m+mi}{31} \PYG{o}{\PYGZhy{}} \PYG{n}{\PYGZus{}\PYGZus{}builtin\PYGZus{}clz}\PYG{p}{(}\PYG{n}{r} \PYG{o}{\PYGZhy{}} \PYG{n}{l} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{);}\PYG{c+c1}{//\PYGZus{}\PYGZus{}builtin\PYGZus{}clz二进制中前导零的个数}
+    \PYG{k}{return} \PYG{n}{min}\PYG{p}{(}\PYG{n}{dp}\PYG{p}{[}\PYG{n}{l}\PYG{p}{][}\PYG{n}{k}\PYG{p}{],} \PYG{n}{dp}\PYG{p}{[}\PYG{n}{r} \PYG{o}{\PYGZhy{}} \PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{k}\PYG{p}{)} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{][}\PYG{n}{k}\PYG{p}{]);}
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{int} \PYG{n+nf}{lcp}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{a}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{b}\PYG{p}{)}
+\PYG{p}{\PYGZob{}} \PYG{c+c1}{// 求两个后缀的最长公共前缀}
+    \PYG{n}{a} \PYG{o}{=} \PYG{n}{ran}\PYG{p}{[}\PYG{n}{a}\PYG{p}{],} \PYG{n}{b} \PYG{o}{=} \PYG{n}{ran}\PYG{p}{[}\PYG{n}{b}\PYG{p}{];}
+    \PYG{k}{if} \PYG{p}{(}\PYG{n}{a} \PYG{o}{\PYGZgt{}} \PYG{n}{b}\PYG{p}{)} \PYG{n}{swap}\PYG{p}{(}\PYG{n}{a}\PYG{p}{,} \PYG{n}{b}\PYG{p}{);}
+    \PYG{k}{return} \PYG{n}{rmq}\PYG{p}{(}\PYG{n}{a} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{b}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

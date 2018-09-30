@@ -1,0 +1,54 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/*}
+\PYG{c+cm}{莫队算法复杂度 O(n*sqrt(n))}
+\PYG{c+cm}{NBUT\PYGZhy{}1457}
+\PYG{c+cm}{*/}
+\PYG{n}{ll} \PYG{n}{lastans}\PYG{p}{;}
+\PYG{k+kt}{int} \PYG{n}{block}\PYG{p}{;}
+
+\PYG{k}{struct} \PYG{n}{node}\PYG{p}{\PYGZob{}}
+ \PYG{k+kt}{int} \PYG{n}{l}\PYG{p}{,}\PYG{n}{r}\PYG{p}{,}\PYG{n}{id}\PYG{p}{;}
+ \PYG{k+kt}{int} \PYG{n}{pos}\PYG{p}{;}\PYG{c+c1}{//分块}
+ \PYG{k+kt}{void} \PYG{n+nf}{init}\PYG{p}{()\PYGZob{}}
+  \PYG{n}{pos}\PYG{o}{=}\PYG{n}{l}\PYG{o}{/}\PYG{n}{block}\PYG{p}{;}
+ \PYG{p}{\PYGZcb{}}
+ \PYG{k+kt}{bool} \PYG{k}{operator}\PYG{o}{\PYGZlt{}}\PYG{p}{(}\PYG{k}{const} \PYG{n}{node} \PYG{o}{\PYGZam{}}\PYG{n}{a}\PYG{p}{)}\PYG{k}{const}\PYG{p}{\PYGZob{}}
+   \PYG{k}{if}\PYG{p}{(}\PYG{n}{pos}\PYG{o}{==}\PYG{n}{a}\PYG{p}{.}\PYG{n}{pos}\PYG{p}{)} \PYG{k}{return} \PYG{n}{r}\PYG{o}{\PYGZlt{}}\PYG{n}{a}\PYG{p}{.}\PYG{n}{r}\PYG{p}{;}
+   \PYG{k}{return} \PYG{n}{pos}\PYG{o}{\PYGZlt{}}\PYG{n}{a}\PYG{p}{.}\PYG{n}{pos}\PYG{p}{;}
+ \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}\PYG{n}{q}\PYG{p}{[}\PYG{n}{maxn}\PYG{p}{];}
+
+\PYG{k+kt}{void} \PYG{n+nf}{addl}\PYG{p}{()\PYGZob{}}
+
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{void} \PYG{n+nf}{dell}\PYG{p}{()\PYGZob{}}
+
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{void} \PYG{n+nf}{addr}\PYG{p}{()\PYGZob{}}
+
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{void} \PYG{n+nf}{delr}\PYG{p}{()\PYGZob{}}
+
+\PYG{p}{\PYGZcb{}}
+
+  \PYG{n}{block}\PYG{o}{=}\PYG{n}{sqrt}\PYG{p}{(}\PYG{n}{n}\PYG{o}{+}\PYG{l+m+mf}{0.5}\PYG{p}{);}\PYG{c+c1}{//}
+  \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{n}{m}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+  \PYG{p}{\PYGZob{}}
+    \PYG{n}{scanf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}\PYGZpc{}d\PYGZpc{}d\PYGZdq{}}\PYG{p}{,}\PYG{o}{\PYGZam{}}\PYG{n}{q}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{l}\PYG{p}{,}\PYG{o}{\PYGZam{}}\PYG{n}{q}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{r}\PYG{p}{);}
+    \PYG{n}{q}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{id}\PYG{o}{=}\PYG{n}{i}\PYG{p}{;}
+    \PYG{n}{q}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{init}\PYG{p}{();}
+   \PYG{p}{\PYGZcb{}}
+   \PYG{n}{sort}\PYG{p}{(}\PYG{n}{q}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{q}\PYG{o}{+}\PYG{n}{m}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{);}
+  \PYG{k+kt}{int} \PYG{n}{lastl}\PYG{o}{=}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{lastr}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;}
+   \PYG{n}{lastans}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{n}{m}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+     \PYG{p}{\PYGZob{}}
+        \PYG{k}{while}\PYG{p}{(}\PYG{n}{lastl}\PYG{o}{\PYGZgt{}}\PYG{n}{q}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{l}\PYG{p}{)} \PYG{n}{dell}\PYG{p}{(}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{n}{lastl}\PYG{p}{);}
+        \PYG{k}{while}\PYG{p}{(}\PYG{n}{lastr}\PYG{o}{\PYGZlt{}}\PYG{n}{q}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{r}\PYG{p}{)} \PYG{n}{addr}\PYG{p}{(}\PYG{o}{++}\PYG{n}{lastr}\PYG{p}{);}
+        \PYG{k}{while}\PYG{p}{(}\PYG{n}{lastl}\PYG{o}{\PYGZlt{}}\PYG{n}{q}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{l}\PYG{p}{)} \PYG{n}{addl}\PYG{p}{(}\PYG{n}{lastl}\PYG{o}{++}\PYG{p}{);}
+        \PYG{k}{while}\PYG{p}{(}\PYG{n}{lastr}\PYG{o}{\PYGZgt{}}\PYG{n}{q}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{r}\PYG{p}{)} \PYG{n}{delr}\PYG{p}{(}\PYG{n}{lastr}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{p}{);}
+       \PYG{n}{ans}\PYG{p}{[}\PYG{n}{q}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{id}\PYG{p}{]}\PYG{o}{=}\PYG{n}{lastans}\PYG{p}{;}
+     \PYG{p}{\PYGZcb{}}
+  \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{n}{m}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+    \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}\PYGZpc{}lld}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}\PYG{n}{ans}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]);}
+\end{Verbatim}

@@ -1,0 +1,40 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/*多边形面积计算*/}
+\PYG{k+kt}{double} \PYG{n+nf}{area}\PYG{p}{(}\PYG{n}{point} \PYG{n}{p}\PYG{p}{[],} \PYG{k+kt}{int} \PYG{n}{n}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k+kt}{double} \PYG{n}{res} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{n}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{n}{res} \PYG{o}{+=} \PYG{p}{(}\PYG{n}{p}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{\PYGZca{}} \PYG{n}{p}\PYG{p}{[(}\PYG{n}{i} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{)} \PYG{o}{\PYGZpc{}} \PYG{n}{n}\PYG{p}{])} \PYG{o}{/} \PYG{l+m+mi}{2}\PYG{p}{;}
+    \PYG{k}{return} \PYG{n}{fabs}\PYG{p}{(}\PYG{n}{res}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+cm}{/*判断点是否在凸多边形内*/}
+\PYG{c+c1}{// 点形成一个凸包, 而且按逆时针排序(如果是顺时针把里面的\PYGZlt{}0改为\PYGZgt{}0)}
+\PYG{c+c1}{// 点的编号 : [0,n)}
+\PYG{c+c1}{// \PYGZhy{}1 : 点在凸多边形外}
+\PYG{c+c1}{// 0  : 点在凸多边形边界上}
+\PYG{c+c1}{// 1  : 点在凸多边形内}
+\PYG{k+kt}{int} \PYG{n+nf}{PointInConvex}\PYG{p}{(}\PYG{n}{point} \PYG{n}{a}\PYG{p}{,} \PYG{n}{point} \PYG{n}{p}\PYG{p}{[],} \PYG{k+kt}{int} \PYG{n}{n}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{n}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+        \PYG{k}{if} \PYG{p}{(}\PYG{n}{sgn}\PYG{p}{((}\PYG{n}{p}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{\PYGZhy{}} \PYG{n}{a}\PYG{p}{)} \PYG{o}{\PYGZca{}} \PYG{p}{(}\PYG{n}{p}\PYG{p}{[(}\PYG{n}{i} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{)} \PYG{o}{\PYGZpc{}} \PYG{n}{n}\PYG{p}{]} \PYG{o}{\PYGZhy{}} \PYG{n}{a}\PYG{p}{))} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{0}\PYG{p}{)}
+            \PYG{k}{return} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{;}
+        \PYG{k}{else} \PYG{k}{if} \PYG{p}{(}\PYG{n}{PointOnSeg}\PYG{p}{(}\PYG{n}{a}\PYG{p}{,} \PYG{n}{line}\PYG{p}{(}\PYG{n}{p}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],} \PYG{n}{p}\PYG{p}{[(}\PYG{n}{i} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{)} \PYG{o}{\PYGZpc{}} \PYG{n}{n}\PYG{p}{])))}
+            \PYG{k}{return} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{return} \PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+cm}{/*判断凸多边形*/}
+\PYG{c+c1}{//点可以是顺时针给出也可以是逆时针给出}
+\PYG{c+c1}{//点的编号1\PYGZti{}n\PYGZhy{}1}
+\PYG{k+kt}{bool} \PYG{n+nf}{isconvex}\PYG{p}{(}\PYG{n}{point} \PYG{n}{poly}\PYG{p}{[],} \PYG{k+kt}{int} \PYG{n}{n}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k+kt}{bool} \PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{];}
+    \PYG{n}{memset}\PYG{p}{(}\PYG{n}{s}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{k}{sizeof}\PYG{p}{(}\PYG{n}{s}\PYG{p}{));}
+    \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{n}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+    \PYG{p}{\PYGZob{}}
+        \PYG{n}{s}\PYG{p}{[}\PYG{n}{sgn}\PYG{p}{((}\PYG{n}{poly}\PYG{p}{[(}\PYG{n}{i} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{)} \PYG{o}{\PYGZpc{}} \PYG{n}{n}\PYG{p}{]} \PYG{o}{\PYGZhy{}} \PYG{n}{poly}\PYG{p}{[}\PYG{n}{i}\PYG{p}{])} \PYG{o}{\PYGZca{}} \PYG{p}{(}\PYG{n}{poly}\PYG{p}{[(}\PYG{n}{i} \PYG{o}{+} \PYG{l+m+mi}{2}\PYG{p}{)} \PYG{o}{\PYGZpc{}} \PYG{n}{n}\PYG{p}{]} \PYG{o}{\PYGZhy{}} \PYG{n}{poly}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]))} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;}
+        \PYG{k}{if} \PYG{p}{(}\PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{s}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{])} \PYG{k}{return} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{k}{return} \PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

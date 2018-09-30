@@ -1,0 +1,53 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/*}
+\PYG{c+cm}{专用于块状链表计算的rope容器 }
+\PYG{c+cm}{平衡树实现，各种操作的复杂度都是O(log n)}
+\PYG{c+cm}{*/}
+\PYG{c+c1}{//头文件}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}ext/rope\PYGZgt{}}
+\PYG{k}{using} \PYG{k}{namespace} \PYG{n}{\PYGZus{}\PYGZus{}gnu\PYGZus{}cxx}\PYG{p}{;}
+
+\PYG{n}{rope}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}} \PYG{n}{T}\PYG{p}{;}
+
+\PYG{n}{T}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{x}\PYG{p}{);}\PYG{c+c1}{//在末尾添加x}
+
+\PYG{n}{T}\PYG{p}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{n}{pos}\PYG{p}{,}\PYG{n}{x}\PYG{p}{);}\PYG{c+c1}{//在pos插入x}
+
+\PYG{n}{T}\PYG{p}{.}\PYG{n}{erase}\PYG{p}{(}\PYG{n}{pos}\PYG{p}{,}\PYG{n}{x}\PYG{p}{);}\PYG{c+c1}{//从pos开始删除x个}
+
+\PYG{n}{T}\PYG{p}{.}\PYG{n}{copy}\PYG{p}{(}\PYG{n}{pos}\PYG{p}{,}\PYG{n}{len}\PYG{p}{,}\PYG{n}{x}\PYG{p}{);}\PYG{c+c1}{//从pos开始到pos+len为止用x代替}
+
+\PYG{n}{T}\PYG{p}{.}\PYG{n}{replace}\PYG{p}{(}\PYG{n}{pos}\PYG{p}{,}\PYG{n}{x}\PYG{p}{);}\PYG{c+c1}{//从pos开始换成x}
+
+\PYG{n}{T}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{n}{pos}\PYG{p}{,}\PYG{n}{x}\PYG{p}{);}\PYG{c+c1}{//提取pos开始x个}
+
+\PYG{n}{T}\PYG{p}{.}\PYG{n}{at}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}\PYG{o}{/}\PYG{p}{[}\PYG{n}{x}\PYG{p}{];}\PYG{c+c1}{//访问第x个元素}
+
+\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}\PYGZpc{}d}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}\PYG{n}{T}\PYG{p}{[}\PYG{n}{i}\PYG{p}{])} \PYG{c+c1}{//输出T[i]}
+\PYG{n}{cout}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{n}{endl}\PYG{p}{;}\PYG{c+c1}{//输出T    }
+
+\PYG{c+cm}{/* 2018nowcoder多校3 https://www.nowcoder.com/acm/contest/141/C */}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}bits/stdc++.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}ext/rope\PYGZgt{}//函数头文件}
+\PYG{k}{using} \PYG{k}{namespace} \PYG{n}{\PYGZus{}\PYGZus{}gnu\PYGZus{}cxx}\PYG{p}{;}
+\PYG{k}{using} \PYG{k}{namespace} \PYG{n}{std}\PYG{p}{;}
+\PYG{k}{const} \PYG{k+kt}{int} \PYG{n}{maxn}\PYG{o}{=}\PYG{l+m+mf}{1e5}\PYG{o}{+}\PYG{l+m+mi}{10}\PYG{p}{;}
+\PYG{n}{rope}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}} \PYG{n}{T}\PYG{p}{;}
+\PYG{k+kt}{int} \PYG{n}{n}\PYG{p}{,}\PYG{n}{m}\PYG{p}{;}
+\PYG{k+kt}{int} \PYG{n+nf}{main}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+    \PYG{n}{scanf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}\PYGZpc{}d\PYGZpc{}d\PYGZdq{}}\PYG{p}{,}\PYG{o}{\PYGZam{}}\PYG{n}{n}\PYG{p}{,}\PYG{o}{\PYGZam{}}\PYG{n}{m}\PYG{p}{);}
+    \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{n}{u}\PYG{o}{\PYGZlt{}=}\PYG{n}{n}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+     \PYG{n}{T}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{i}\PYG{p}{);}
+     \PYG{k}{while}\PYG{p}{(}\PYG{n}{m}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{p}{)}
+     \PYG{p}{\PYGZob{}}
+         \PYG{k+kt}{int} \PYG{n}{p}\PYG{p}{,}\PYG{n}{s}\PYG{p}{;}
+         \PYG{n}{scanf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}\PYGZpc{}d\PYGZpc{}d\PYGZdq{}}\PYG{p}{,}\PYG{o}{\PYGZam{}}\PYG{n}{p}\PYG{p}{,}\PYG{o}{\PYGZam{}}\PYG{n}{s}\PYG{p}{);}
+         \PYG{n}{p}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{p}{;}
+         \PYG{n}{T}\PYG{o}{=}\PYG{n}{T}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{n}{p}\PYG{p}{,}\PYG{n}{s}\PYG{p}{)}\PYG{o}{+}\PYG{n}{T}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{p}\PYG{p}{)}\PYG{o}{+}\PYG{n}{T}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{n}{p}\PYG{o}{+}\PYG{n}{s}\PYG{p}{,}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{n}{p}\PYG{o}{\PYGZhy{}}\PYG{n}{s}\PYG{p}{);}
+     \PYG{p}{\PYGZcb{}}
+     \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{n}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+      \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}\PYGZpc{}d \PYGZdq{}}\PYG{p}{,}\PYG{n}{T}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]);}
+      \PYG{k}{return} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,53 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/*Java大数高精度亲情讲义}
+
+\PYG{c+cm}{java输入输出架构（注意主类为Main）}
+\PYG{c+cm}{*/}
+\PYG{k+kn}{import} \PYG{n+nn}{java.util.Scanner}\PYG{o}{;}\PYG{c+c1}{//输入架构}
+\PYG{k+kd}{public} \PYG{k+kd}{class} \PYG{n+nc}{Main} \PYG{o}{\PYGZob{}}
+	\PYG{k+kd}{public} \PYG{k+kd}{static} \PYG{k+kt}{void} \PYG{n+nf}{main}\PYG{o}{(}\PYG{n}{String}\PYG{o}{[]} \PYG{n}{args}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		\PYG{n}{Scanner} \PYG{n}{s}\PYG{o}{=}\PYG{k}{new} \PYG{n}{Scanner}\PYG{o}{(}\PYG{n}{System}\PYG{o}{.}\PYG{n+na}{in}\PYG{o}{);}
+		\PYG{k+kt}{int} \PYG{n}{a}\PYG{o}{,}\PYG{n}{b}\PYG{o}{;}
+		\PYG{n}{a}\PYG{o}{=}\PYG{n}{s}\PYG{o}{.}\PYG{n+na}{nextInt}\PYG{o}{();}
+		\PYG{n}{b}\PYG{o}{=}\PYG{n}{s}\PYG{o}{.}\PYG{n+na}{nextInt}\PYG{o}{();}
+		\PYG{n}{System}\PYG{o}{.}\PYG{n+na}{out}\PYG{o}{.}\PYG{n+na}{println}\PYG{o}{((}\PYG{n}{a}\PYG{o}{+}\PYG{n}{b}\PYG{o}{));}
+	\PYG{o}{\PYGZcb{}}
+\PYG{o}{\PYGZcb{}}
+
+\PYG{c+cm}{/*java函数调用*/}
+\PYG{k+kn}{import} \PYG{n+nn}{java.util.Scanner}\PYG{o}{;}
+\PYG{k+kd}{public} \PYG{k+kd}{class} \PYG{n+nc}{Main} \PYG{o}{\PYGZob{}}
+	\PYG{k+kd}{public} \PYG{k+kd}{static} \PYG{k+kt}{int} \PYG{n+nf}{gcd}\PYG{o}{(}\PYG{k+kt}{int} \PYG{n}{a}\PYG{o}{,}\PYG{k+kt}{int} \PYG{n}{b}\PYG{o}{)}
+	\PYG{o}{\PYGZob{}}
+		\PYG{k}{if}\PYG{o}{(}\PYG{n}{b}\PYG{o}{==}\PYG{l+m+mi}{0}\PYG{o}{)}
+			\PYG{k}{return} \PYG{n}{a}\PYG{o}{;}
+		\PYG{k}{else}
+			\PYG{k}{return} \PYG{n}{gcd}\PYG{o}{(}\PYG{n}{b}\PYG{o}{,}\PYG{n}{a}\PYG{o}{\PYGZpc{}}\PYG{n}{b}\PYG{o}{);}
+	\PYG{o}{\PYGZcb{}}
+	\PYG{k+kd}{public} \PYG{k+kd}{static} \PYG{k+kt}{void} \PYG{n+nf}{main}\PYG{o}{(}\PYG{n}{String}\PYG{o}{[]} \PYG{n}{args}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		\PYG{n}{Scanner} \PYG{n}{s}\PYG{o}{=}\PYG{k}{new} \PYG{n}{Scanner}\PYG{o}{(}\PYG{n}{System}\PYG{o}{.}\PYG{n+na}{in}\PYG{o}{);}
+		\PYG{k+kt}{int} \PYG{n}{a}\PYG{o}{,}\PYG{n}{b}\PYG{o}{,}\PYG{n}{sum}\PYG{o}{,}\PYG{n}{i}\PYG{o}{;}
+		\PYG{k}{while}\PYG{o}{(}\PYG{n}{s}\PYG{o}{.}\PYG{n+na}{hasNext}\PYG{o}{())}
+		\PYG{o}{\PYGZob{}}
+		\PYG{n}{a}\PYG{o}{=}\PYG{n}{s}\PYG{o}{.}\PYG{n+na}{nextInt}\PYG{o}{();}
+		\PYG{n}{b}\PYG{o}{=}\PYG{n}{s}\PYG{o}{.}\PYG{n+na}{nextInt}\PYG{o}{();}
+		\PYG{n}{sum}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{o}{;}
+		\PYG{n}{i}\PYG{o}{=}\PYG{n}{b}\PYG{o}{;}
+		\PYG{k}{while}\PYG{o}{(}\PYG{n}{i}\PYG{o}{!=}\PYG{l+m+mi}{0}\PYG{o}{)}
+		\PYG{o}{\PYGZob{}}
+			\PYG{k+kt}{int} \PYG{n}{temp}\PYG{o}{=}\PYG{n}{gcd}\PYG{o}{(}\PYG{n}{a}\PYG{o}{,}\PYG{n}{b}\PYG{o}{);}
+			\PYG{k}{if}\PYG{o}{(}\PYG{n}{temp}\PYG{o}{==}\PYG{l+m+mi}{1}\PYG{o}{)}
+				\PYG{k}{break}\PYG{o}{;}
+			\PYG{k}{else}
+			\PYG{o}{\PYGZob{}}
+				\PYG{n}{sum}\PYG{o}{*=}\PYG{n}{temp}\PYG{o}{;}
+				\PYG{n}{a}\PYG{o}{/=}\PYG{n}{temp}\PYG{o}{;}
+			\PYG{o}{\PYGZcb{}}
+			\PYG{n}{i}\PYG{o}{\PYGZhy{}\PYGZhy{};}
+		\PYG{o}{\PYGZcb{}}
+		\PYG{n}{System}\PYG{o}{.}\PYG{n+na}{out}\PYG{o}{.}\PYG{n+na}{print}\PYG{o}{(}\PYG{n}{sum}\PYG{o}{+}\PYG{l+s}{\PYGZdq{}\PYGZbs{}n\PYGZdq{}}\PYG{o}{);}
+		\PYG{o}{\PYGZcb{}}
+	\PYG{o}{\PYGZcb{}}
+
+\PYG{o}{\PYGZcb{}}
+\end{Verbatim}

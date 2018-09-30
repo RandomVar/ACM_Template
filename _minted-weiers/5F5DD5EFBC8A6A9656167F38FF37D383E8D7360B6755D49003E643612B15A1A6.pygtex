@@ -1,0 +1,25 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/*求整点数*/}
+
+\PYG{c+cm}{/*线段上整点数*/}
+\PYG{k+kt}{int} \PYG{n+nf}{OnSegment}\PYG{p}{(}\PYG{n}{line} \PYG{n}{l}\PYG{p}{)} \PYG{p}{\PYGZob{}} \PYG{k}{return} \PYG{n}{\PYGZus{}\PYGZus{}gcd}\PYG{p}{(}\PYG{n}{fabs}\PYG{p}{(}\PYG{n}{l}\PYG{p}{.}\PYG{n}{s}\PYG{p}{.}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{l}\PYG{p}{.}\PYG{n}{e}\PYG{p}{.}\PYG{n}{x}\PYG{p}{),} \PYG{n}{fabs}\PYG{p}{(}\PYG{n}{l}\PYG{p}{.}\PYG{n}{s}\PYG{p}{.}\PYG{n}{y} \PYG{o}{\PYGZhy{}} \PYG{n}{l}\PYG{p}{.}\PYG{n}{e}\PYG{p}{.}\PYG{n}{y}\PYG{p}{))} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{;} \PYG{p}{\PYGZcb{}}
+
+
+\PYG{c+cm}{/*多边形边上整点数*/}
+\PYG{k+kt}{int} \PYG{n+nf}{OnEdge}\PYG{p}{(}\PYG{n}{point} \PYG{n}{p}\PYG{p}{[],} \PYG{k+kt}{int} \PYG{n}{n}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k+kt}{int} \PYG{n}{i}\PYG{p}{,} \PYG{n}{ret} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{for} \PYG{p}{(}\PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{n}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+        \PYG{n}{ret} \PYG{o}{+=} \PYG{n}{\PYGZus{}\PYGZus{}gcd}\PYG{p}{(}\PYG{n}{fabs}\PYG{p}{(}\PYG{n}{p}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{p}\PYG{p}{[(}\PYG{n}{i} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{)} \PYG{o}{\PYGZpc{}} \PYG{n}{n}\PYG{p}{].}\PYG{n}{x}\PYG{p}{),} \PYG{n}{fabs}\PYG{p}{(}\PYG{n}{p}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{y} \PYG{o}{\PYGZhy{}} \PYG{n}{p}\PYG{p}{[(}\PYG{n}{i} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{)} \PYG{o}{\PYGZpc{}} \PYG{n}{n}\PYG{p}{].}\PYG{n}{y}\PYG{p}{));}
+    \PYG{k}{return} \PYG{n}{ret}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+cm}{/*多边形内部整点数*/}
+\PYG{k+kt}{int} \PYG{n+nf}{InSide}\PYG{p}{(}\PYG{n}{point} \PYG{n}{p}\PYG{p}{[],} \PYG{k+kt}{int} \PYG{n}{n}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k+kt}{int} \PYG{n}{i}\PYG{p}{,} \PYG{n}{area} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{for} \PYG{p}{(}\PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{n}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+        \PYG{n}{area} \PYG{o}{+=} \PYG{n}{p}\PYG{p}{[(}\PYG{n}{i} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{)} \PYG{o}{\PYGZpc{}} \PYG{n}{n}\PYG{p}{].}\PYG{n}{y} \PYG{o}{*} \PYG{p}{(}\PYG{n}{p}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{p}\PYG{p}{[(}\PYG{n}{i} \PYG{o}{+} \PYG{l+m+mi}{2}\PYG{p}{)} \PYG{o}{\PYGZpc{}} \PYG{n}{n}\PYG{p}{].}\PYG{n}{x}\PYG{p}{);}
+    \PYG{k}{return} \PYG{p}{(}\PYG{n}{fabs}\PYG{p}{(}\PYG{n}{area}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{n}{OnEdge}\PYG{p}{(}\PYG{n}{p}\PYG{p}{,} \PYG{n}{n}\PYG{p}{))} \PYG{o}{/} \PYG{l+m+mi}{2} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

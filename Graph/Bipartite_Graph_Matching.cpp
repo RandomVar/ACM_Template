@@ -101,63 +101,58 @@ return res; }
 /*KM算法*/
 /**二分图最佳匹配**/
 /*steal from csl*/
-const int maxn = "";
-int nx, ny;                           //两边的点数
-int g[maxn][maxn];                    //二分图描述
-int linker[maxn], lx[maxn], ly[maxn]; //y中各点匹配状态,x,y中的点标号
-int slack[N];
-bool visx[N], visy[N];
-bool dfs(int x)
+const int maxn = " ";
+int n;
+int cost[maxn][maxn];
+int lx[maxn], ly[maxn], match[maxn], slack[maxn];
+int prev[maxn];
+bool vy[maxn];
+
+void augment(int root)
 {
-    visx[x] = true;
-    for (int y = 0; y < ny; y++)
+    fill(vy + 1, vy + n + 1, false);
+    fill(slack + 1, slack + n + 1, inf);
+    int py;
+    match[py = 0] = root;
+    do
     {
-        if (visy[y]) continue;
-        int tmp = lx[x] + ly[y] - g[x][y];
-        if (tmp == 0)
+        vy[py] = true;
+        int x = match[py], yy;
+        int delta = inf;
+        for (int y = 1; y <= n; y++)
         {
-            visy[y] = true;
-            if (linker[y] == -1 || dfs(linker[y]))
+            if (!vy[y])
             {
-                linker[y] = x;
-                return true;
+                if (lx[x] + ly[y] - cost[x][y] < slack[y])
+                    slack[y] = lx[x] + ly[y] - cost[x][y], prev[y] = py;
+                if (slack[y] < delta) delta = slack[y], yy = y;
             }
         }
-        else if (slack[y] > tmp)
-            slack[y] = tmp;
-    }
-    return false;
+        for (int y = 0; y <= n; y++)
+        {
+            if (vy[y])
+                lx[match[y]] -= delta, ly[y] += delta;
+            else
+                slack[y] -= delta;
+        }
+        py = yy;
+    } while (match[py] != -1);
+    do
+    {
+        int pre = prev[py];
+        match[py] = match[pre], py = pre;
+    } while (py);
 }
 int KM()
 {
-    mem(linker, -1), mem(ly, 0);
-    for (int i = 0; i < nx; i++)
+    for (int i = 1; i <= n; i++)
     {
-        lx[i] = -inf;
-        for (int j = 0; j < ny; j++)
-            if (g[i][j] > lx[i]) lx[i] = g[i][j];
+        lx[i] = ly[i] = 0;
+        match[i] = -1;
+        for (int j = 1; j <= n; j++) lx[i] = max(lx[i], cost[i][j]);
     }
-    for (int x = 0; x < nx; x++)
-    {
-        mem(slack, 0x3f);
-        for (;;)
-        {
-            mem(visx, 0), mem(visy, 0);
-            if (dfs(x)) break;
-            int d = inf;
-            for (int i = 0; i < ny; i++)
-                if (!visy[i] && d > slack[i]) d = slack[i];
-            for (int i = 0; i < nx; i++)
-                if (visx[i]) lx[i] -= d;
-            for (int i = 0; i < ny; i++)
-                if (visy[i])
-                    ly[i] += d;
-                else
-                    slack[i] -= d;
-        }
-    }
-    int res = 0;
-    for (int i = 0; i < ny; i++)
-        if (~linker[i]) res += g[linker[i]][i];
-    return res;
+    int answer = 0;
+    for (int root = 1; root <= n; root++) augment(root);
+    for (int i = 1; i <= n; i++) answer += lx[i], answer += ly[i];
+    return answer;
 }

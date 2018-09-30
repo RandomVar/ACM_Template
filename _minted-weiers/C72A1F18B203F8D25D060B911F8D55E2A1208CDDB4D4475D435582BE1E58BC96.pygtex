@@ -1,0 +1,115 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{struct} \PYG{n}{Point}
+\PYG{p}{\PYGZob{}}
+    \PYG{k+kt}{double} \PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{;}
+    \PYG{n}{Point}\PYG{p}{(}\PYG{k+kt}{double} \PYG{n}{x} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{y} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{o}{:} \PYG{n}{x}\PYG{p}{(}\PYG{n}{x}\PYG{p}{),} \PYG{n}{y}\PYG{p}{(}\PYG{n}{y}\PYG{p}{)} \PYG{p}{\PYGZob{}\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{k}{typedef} \PYG{n}{Point} \PYG{n}{Vector}\PYG{p}{;}
+
+\PYG{c+c1}{//向量+向量=向量，点+向量=点}
+\PYG{n}{Vector} \PYG{k}{operator}\PYG{o}{+}\PYG{p}{(}\PYG{n}{Vector} \PYG{n}{A}\PYG{p}{,} \PYG{n}{Vector} \PYG{n}{B}\PYG{p}{)} \PYG{p}{\PYGZob{}} \PYG{k}{return} \PYG{n}{Vector}\PYG{p}{(}\PYG{n}{A}\PYG{p}{.}\PYG{n}{x} \PYG{o}{+} \PYG{n}{B}\PYG{p}{.}\PYG{n}{x}\PYG{p}{,} \PYG{n}{A}\PYG{p}{.}\PYG{n}{y} \PYG{o}{+} \PYG{n}{B}\PYG{p}{.}\PYG{n}{y}\PYG{p}{);} \PYG{p}{\PYGZcb{}}
+\PYG{c+c1}{//点\PYGZhy{}点=向量}
+\PYG{n}{Vector} \PYG{k}{operator}\PYG{o}{\PYGZhy{}}\PYG{p}{(}\PYG{n}{Point} \PYG{n}{A}\PYG{p}{,} \PYG{n}{Point} \PYG{n}{B}\PYG{p}{)} \PYG{p}{\PYGZob{}} \PYG{k}{return} \PYG{n}{Vector}\PYG{p}{(}\PYG{n}{A}\PYG{p}{.}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{B}\PYG{p}{.}\PYG{n}{x}\PYG{p}{,} \PYG{n}{A}\PYG{p}{.}\PYG{n}{y} \PYG{o}{\PYGZhy{}} \PYG{n}{B}\PYG{p}{.}\PYG{n}{y}\PYG{p}{);} \PYG{p}{\PYGZcb{}}
+\PYG{c+c1}{//向量*数=向量}
+\PYG{n}{Vector} \PYG{k}{operator}\PYG{o}{*}\PYG{p}{(}\PYG{n}{Vector} \PYG{n}{A}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{p}\PYG{p}{)} \PYG{p}{\PYGZob{}} \PYG{k}{return} \PYG{n}{Vector}\PYG{p}{(}\PYG{n}{A}\PYG{p}{.}\PYG{n}{x} \PYG{o}{*} \PYG{n}{p}\PYG{p}{,} \PYG{n}{A}\PYG{p}{.}\PYG{n}{y} \PYG{o}{*} \PYG{n}{p}\PYG{p}{);} \PYG{p}{\PYGZcb{}}
+\PYG{c+c1}{//向量/数=向量}
+\PYG{n}{Vector} \PYG{k}{operator}\PYG{o}{/}\PYG{p}{(}\PYG{n}{Vector} \PYG{n}{A}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{p}\PYG{p}{)} \PYG{p}{\PYGZob{}} \PYG{k}{return} \PYG{n}{Vector}\PYG{p}{(}\PYG{n}{A}\PYG{p}{.}\PYG{n}{x} \PYG{o}{/} \PYG{n}{p}\PYG{p}{,} \PYG{n}{A}\PYG{p}{.}\PYG{n}{y} \PYG{o}{/} \PYG{n}{p}\PYG{p}{);} \PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{bool} \PYG{k}{operator}\PYG{o}{\PYGZlt{}}\PYG{p}{(}\PYG{k}{const} \PYG{n}{Point}\PYG{o}{\PYGZam{}} \PYG{n}{a}\PYG{p}{,} \PYG{k}{const} \PYG{n}{Point}\PYG{o}{\PYGZam{}} \PYG{n}{b}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{return} \PYG{n}{a}\PYG{p}{.}\PYG{n}{x} \PYG{o}{\PYGZlt{}} \PYG{n}{b}\PYG{p}{.}\PYG{n}{x} \PYG{o}{||} \PYG{p}{(}\PYG{n}{a}\PYG{p}{.}\PYG{n}{x} \PYG{o}{==} \PYG{n}{b}\PYG{p}{.}\PYG{n}{x} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{a}\PYG{p}{.}\PYG{n}{y} \PYG{o}{\PYGZlt{}} \PYG{n}{b}\PYG{p}{.}\PYG{n}{y}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k}{const} \PYG{k+kt}{double} \PYG{n}{eps} \PYG{o}{=} \PYG{l+m+mf}{1e\PYGZhy{}10}\PYG{p}{;}
+\PYG{k+kt}{double} \PYG{n+nf}{dcmp}\PYG{p}{(}\PYG{k+kt}{double} \PYG{n}{x}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{if} \PYG{p}{(}\PYG{n}{fabs}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)} \PYG{o}{\PYGZlt{}} \PYG{n}{eps}\PYG{p}{)}
+        \PYG{k}{return} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{else}
+        \PYG{k}{return} \PYG{n}{x} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{0} \PYG{o}{?} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1} \PYG{o}{:} \PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{bool} \PYG{k}{operator}\PYG{o}{==}\PYG{p}{(}\PYG{k}{const} \PYG{n}{Point}\PYG{o}{\PYGZam{}} \PYG{n}{a}\PYG{p}{,} \PYG{k}{const} \PYG{n}{Point}\PYG{o}{\PYGZam{}} \PYG{n}{b}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{return} \PYG{n}{dcmp}\PYG{p}{(}\PYG{n}{a}\PYG{p}{.}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{b}\PYG{p}{.}\PYG{n}{x}\PYG{p}{)} \PYG{o}{==} \PYG{l+m+mi}{0} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{dcmp}\PYG{p}{(}\PYG{n}{a}\PYG{p}{.}\PYG{n}{y} \PYG{o}{\PYGZhy{}} \PYG{n}{b}\PYG{p}{.}\PYG{n}{y}\PYG{p}{)} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+cm}{/*}
+\PYG{c+cm}{ * 基本运算：}
+\PYG{c+cm}{ * 点积}
+\PYG{c+cm}{ * 叉积}
+\PYG{c+cm}{ * 向量旋转}
+\PYG{c+cm}{ */}
+\PYG{k+kt}{double} \PYG{n}{Dot}\PYG{p}{(}\PYG{n}{Vector} \PYG{n}{A}\PYG{p}{,} \PYG{n}{Vector} \PYG{n}{B}\PYG{p}{)} \PYG{p}{\PYGZob{}} \PYG{k}{return} \PYG{n}{A}\PYG{p}{.}\PYG{n}{x} \PYG{o}{*} \PYG{n}{B}\PYG{p}{.}\PYG{n}{x} \PYG{o}{+} \PYG{n}{A}\PYG{p}{.}\PYG{n}{y} \PYG{o}{*} \PYG{n}{B}\PYG{p}{.}\PYG{n}{y}\PYG{p}{;} \PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{double} \PYG{n}{Length}\PYG{p}{(}\PYG{n}{Vector} \PYG{n}{A}\PYG{p}{)} \PYG{p}{\PYGZob{}} \PYG{k}{return} \PYG{n}{sqrt}\PYG{p}{(}\PYG{n}{Dot}\PYG{p}{(}\PYG{n}{A}\PYG{p}{,} \PYG{n}{A}\PYG{p}{));} \PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{double} \PYG{n}{Angle}\PYG{p}{(}\PYG{n}{Vector} \PYG{n}{A}\PYG{p}{,} \PYG{n}{Vector} \PYG{n}{B}\PYG{p}{)} \PYG{p}{\PYGZob{}} \PYG{k}{return} \PYG{n}{acos}\PYG{p}{(}\PYG{n}{Dot}\PYG{p}{(}\PYG{n}{A}\PYG{p}{,} \PYG{n}{B}\PYG{p}{)} \PYG{o}{/} \PYG{n}{Length}\PYG{p}{(}\PYG{n}{A}\PYG{p}{)} \PYG{o}{/} \PYG{n}{Length}\PYG{p}{(}\PYG{n}{B}\PYG{p}{));} \PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{double} \PYG{n}{Cross}\PYG{p}{(}\PYG{n}{Vector} \PYG{n}{A}\PYG{p}{,} \PYG{n}{Vector} \PYG{n}{B}\PYG{p}{)} \PYG{p}{\PYGZob{}} \PYG{k}{return} \PYG{n}{A}\PYG{p}{.}\PYG{n}{x} \PYG{o}{*} \PYG{n}{B}\PYG{p}{.}\PYG{n}{y} \PYG{o}{\PYGZhy{}} \PYG{n}{A}\PYG{p}{.}\PYG{n}{y} \PYG{o}{*} \PYG{n}{B}\PYG{p}{.}\PYG{n}{x}\PYG{p}{;} \PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{double} \PYG{n}{Area2}\PYG{p}{(}\PYG{n}{Point} \PYG{n}{A}\PYG{p}{,} \PYG{n}{Point} \PYG{n}{B}\PYG{p}{,} \PYG{n}{Point} \PYG{n}{C}\PYG{p}{)} \PYG{p}{\PYGZob{}} \PYG{k}{return} \PYG{n}{Cross}\PYG{p}{(}\PYG{n}{B} \PYG{o}{\PYGZhy{}} \PYG{n}{A}\PYG{p}{,} \PYG{n}{C} \PYG{o}{\PYGZhy{}} \PYG{n}{A}\PYG{p}{);} \PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//rad是弧度}
+\PYG{n}{Vector} \PYG{n}{Rotate}\PYG{p}{(}\PYG{n}{Vector} \PYG{n}{A}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{rad}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{return} \PYG{n}{Vector}\PYG{p}{(}\PYG{n}{A}\PYG{p}{.}\PYG{n}{x} \PYG{o}{*} \PYG{n}{cos}\PYG{p}{(}\PYG{n}{rad}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{n}{A}\PYG{p}{.}\PYG{n}{y} \PYG{o}{*} \PYG{n}{sin}\PYG{p}{(}\PYG{n}{rad}\PYG{p}{),}
+                  \PYG{n}{A}\PYG{p}{.}\PYG{n}{x} \PYG{o}{*} \PYG{n}{sin}\PYG{p}{(}\PYG{n}{rad}\PYG{p}{)} \PYG{o}{+} \PYG{n}{A}\PYG{p}{.}\PYG{n}{y} \PYG{o}{*} \PYG{n}{cos}\PYG{p}{(}\PYG{n}{rad}\PYG{p}{));}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//调用前请确保A不是零向量}
+\PYG{n}{Vector} \PYG{n}{Normal}\PYG{p}{(}\PYG{n}{Vector} \PYG{n}{A}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k+kt}{double} \PYG{n}{L} \PYG{o}{=} \PYG{n}{Length}\PYG{p}{(}\PYG{n}{A}\PYG{p}{);}
+    \PYG{k}{return} \PYG{n+nf}{Vector}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{A}\PYG{p}{.}\PYG{n}{y} \PYG{o}{/} \PYG{n}{L}\PYG{p}{,} \PYG{n}{A}\PYG{p}{.}\PYG{n}{x} \PYG{o}{/} \PYG{n}{L}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+cm}{/*}
+\PYG{c+cm}{ * 点和直线：}
+\PYG{c+cm}{ * 两直线交点}
+\PYG{c+cm}{ * 点到直线的距离}
+\PYG{c+cm}{ * 点到线段的距离}
+\PYG{c+cm}{ * 点在直线上的投影}
+\PYG{c+cm}{ * 线段相交判定}
+\PYG{c+cm}{ * 点在线段上判定}
+\PYG{c+cm}{ */}
+
+\PYG{c+c1}{//调用前保证两条直线P+tv和Q+tw有唯一交点。当且仅当Cross(v, w)非0}
+\PYG{n}{Point} \PYG{n}{GetLineIntersection}\PYG{p}{(}\PYG{n}{Point} \PYG{n}{P}\PYG{p}{,} \PYG{n}{Vector} \PYG{n}{v}\PYG{p}{,} \PYG{n}{Point} \PYG{n}{Q}\PYG{p}{,} \PYG{n}{Vector} \PYG{n}{w}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{n}{Vector} \PYG{n}{u} \PYG{o}{=} \PYG{n}{P} \PYG{o}{\PYGZhy{}} \PYG{n}{Q}\PYG{p}{;}
+    \PYG{k+kt}{double} \PYG{n}{t} \PYG{o}{=} \PYG{n}{Cross}\PYG{p}{(}\PYG{n}{w}\PYG{p}{,} \PYG{n}{u}\PYG{p}{)} \PYG{o}{/} \PYG{n}{Cross}\PYG{p}{(}\PYG{n}{v}\PYG{p}{,} \PYG{n}{w}\PYG{p}{);}
+    \PYG{k}{return} \PYG{n}{P} \PYG{o}{+} \PYG{n}{v} \PYG{o}{*} \PYG{n}{t}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{double} \PYG{n}{DistanceToLine}\PYG{p}{(}\PYG{n}{Point} \PYG{n}{P}\PYG{p}{,} \PYG{n}{Point} \PYG{n}{A}\PYG{p}{,} \PYG{n}{Point} \PYG{n}{B}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{n}{Vector} \PYG{n}{v1} \PYG{o}{=} \PYG{n}{B} \PYG{o}{\PYGZhy{}} \PYG{n}{A}\PYG{p}{,} \PYG{n}{v2} \PYG{o}{=} \PYG{n}{P} \PYG{o}{\PYGZhy{}} \PYG{n}{A}\PYG{p}{;}
+    \PYG{k}{return} \PYG{n+nf}{fabs}\PYG{p}{(}\PYG{n}{Cross}\PYG{p}{(}\PYG{n}{v1}\PYG{p}{,} \PYG{n}{v2}\PYG{p}{))} \PYG{o}{/} \PYG{n}{Length}\PYG{p}{(}\PYG{n}{v1}\PYG{p}{);} \PYG{c+c1}{//如果不取绝对值，得到的是有向距离}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{double} \PYG{n}{DistanceToSegment}\PYG{p}{(}\PYG{n}{Point} \PYG{n}{P}\PYG{p}{,} \PYG{n}{Point} \PYG{n}{A}\PYG{p}{,} \PYG{n}{Point} \PYG{n}{B}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{if} \PYG{p}{(}\PYG{n}{A} \PYG{o}{==} \PYG{n}{B}\PYG{p}{)} \PYG{k}{return} \PYG{n}{Length}\PYG{p}{(}\PYG{n}{P} \PYG{o}{\PYGZhy{}} \PYG{n}{A}\PYG{p}{);}
+    \PYG{n}{Vector} \PYG{n}{v1} \PYG{o}{=} \PYG{n}{B} \PYG{o}{\PYGZhy{}} \PYG{n}{A}\PYG{p}{,} \PYG{n}{v2} \PYG{o}{=} \PYG{n}{P} \PYG{o}{\PYGZhy{}} \PYG{n}{A}\PYG{p}{,} \PYG{n}{v3} \PYG{o}{=} \PYG{n}{P} \PYG{o}{\PYGZhy{}} \PYG{n}{B}\PYG{p}{;}
+    \PYG{k}{if} \PYG{p}{(}\PYG{n}{dcmp}\PYG{p}{(}\PYG{n}{Dot}\PYG{p}{(}\PYG{n}{v1}\PYG{p}{,} \PYG{n}{v2}\PYG{p}{))} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{k}{return} \PYG{n}{Length}\PYG{p}{(}\PYG{n}{v2}\PYG{p}{);}
+    \PYG{k}{if} \PYG{p}{(}\PYG{n}{dcmp}\PYG{p}{(}\PYG{n}{Dot}\PYG{p}{(}\PYG{n}{v1}\PYG{p}{,} \PYG{n}{v3}\PYG{p}{))} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{k}{return} \PYG{n}{Length}\PYG{p}{(}\PYG{n}{v3}\PYG{p}{);}
+    \PYG{k}{return} \PYG{n+nf}{fabs}\PYG{p}{(}\PYG{n}{Cross}\PYG{p}{(}\PYG{n}{v1}\PYG{p}{,} \PYG{n}{v2}\PYG{p}{))} \PYG{o}{/} \PYG{n}{Length}\PYG{p}{(}\PYG{n}{v1}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{Point} \PYG{n}{GetLineProjection}\PYG{p}{(}\PYG{n}{Point} \PYG{n}{P}\PYG{p}{,} \PYG{n}{Point} \PYG{n}{A}\PYG{p}{,} \PYG{n}{Point} \PYG{n}{B}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{n}{Vector} \PYG{n}{v} \PYG{o}{=} \PYG{n}{B} \PYG{o}{\PYGZhy{}} \PYG{n}{A}\PYG{p}{;}
+    \PYG{k}{return} \PYG{n}{A} \PYG{o}{+} \PYG{n}{v} \PYG{o}{*} \PYG{p}{(}\PYG{n}{Dot}\PYG{p}{(}\PYG{n}{v}\PYG{p}{,} \PYG{n}{P} \PYG{o}{\PYGZhy{}} \PYG{n}{A}\PYG{p}{)} \PYG{o}{/} \PYG{n}{Dot}\PYG{p}{(}\PYG{n}{v}\PYG{p}{,} \PYG{n}{v}\PYG{p}{));}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{bool} \PYG{n}{SegmentProperIntersection}\PYG{p}{(}\PYG{n}{Point} \PYG{n}{a1}\PYG{p}{,} \PYG{n}{Point} \PYG{n}{a2}\PYG{p}{,} \PYG{n}{Point} \PYG{n}{b1}\PYG{p}{,} \PYG{n}{Point} \PYG{n}{b2}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k+kt}{double} \PYG{n}{c1} \PYG{o}{=} \PYG{n}{Cross}\PYG{p}{(}\PYG{n}{a2} \PYG{o}{\PYGZhy{}} \PYG{n}{a1}\PYG{p}{,} \PYG{n}{b1} \PYG{o}{\PYGZhy{}} \PYG{n}{a1}\PYG{p}{),} \PYG{n}{c2} \PYG{o}{=} \PYG{n}{Cross}\PYG{p}{(}\PYG{n}{a2} \PYG{o}{\PYGZhy{}} \PYG{n}{a1}\PYG{p}{,} \PYG{n}{b2} \PYG{o}{\PYGZhy{}} \PYG{n}{b1}\PYG{p}{),}
+           \PYG{n}{c3} \PYG{o}{=} \PYG{n}{Cross}\PYG{p}{(}\PYG{n}{b2} \PYG{o}{\PYGZhy{}} \PYG{n}{b1}\PYG{p}{,} \PYG{n}{a1} \PYG{o}{\PYGZhy{}} \PYG{n}{b1}\PYG{p}{),} \PYG{n}{c4} \PYG{o}{=} \PYG{n}{Cross}\PYG{p}{(}\PYG{n}{b2} \PYG{o}{\PYGZhy{}} \PYG{n}{b1}\PYG{p}{,} \PYG{n}{a2} \PYG{o}{\PYGZhy{}} \PYG{n}{b1}\PYG{p}{);}
+    \PYG{k}{return} \PYG{n+nf}{dcmp}\PYG{p}{(}\PYG{n}{c1}\PYG{p}{)} \PYG{o}{*} \PYG{n}{dcmp}\PYG{p}{(}\PYG{n}{c2}\PYG{p}{)} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{0} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{dcmp}\PYG{p}{(}\PYG{n}{c3}\PYG{p}{)} \PYG{o}{*} \PYG{n}{dcmp}\PYG{p}{(}\PYG{n}{c4}\PYG{p}{)} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{bool} \PYG{n}{OnSegment}\PYG{p}{(}\PYG{n}{Point} \PYG{n}{p}\PYG{p}{,} \PYG{n}{Point} \PYG{n}{a1}\PYG{p}{,} \PYG{n}{Point} \PYG{n}{a2}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{return} \PYG{n}{dcmp}\PYG{p}{(}\PYG{n}{Cross}\PYG{p}{(}\PYG{n}{a1} \PYG{o}{\PYGZhy{}} \PYG{n}{p}\PYG{p}{,} \PYG{n}{a2} \PYG{o}{\PYGZhy{}} \PYG{n}{p}\PYG{p}{))} \PYG{o}{==} \PYG{l+m+mi}{0} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{dcmp}\PYG{p}{(}\PYG{n}{Dot}\PYG{p}{(}\PYG{n}{a1} \PYG{o}{\PYGZhy{}} \PYG{n}{p}\PYG{p}{,} \PYG{n}{a2} \PYG{o}{\PYGZhy{}} \PYG{n}{p}\PYG{p}{))} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
