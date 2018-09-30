@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}\PYGZpc{}04d}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}\PYG{n}{x}\PYG{p}{);}\PYG{c+c1}{//输出4位,不足则前面填充0}
-
-\PYG{c+cm}{/*c++格式化 long double的输出*/}
- \PYG{k+kt}{long} \PYG{k+kt}{double} \PYG{n}{t1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{l} \PYG{o}{\PYGZhy{}} \PYG{n}{t2} \PYG{o}{*} \PYG{n}{v2}\PYG{p}{)} \PYG{o}{/} \PYG{n}{v1}\PYG{p}{;}
-\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{fixed} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{setprecision}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{)} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{t1} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{endl}\PYG{p}{;}\PYG{c+c1}{//保留10位小数}
-\end{Verbatim}
