@@ -1,6 +1,8 @@
-#include<cstdio>
-#include<cstring>
-#include<algorithm>
+/*
+复杂度线性
+加完特殊字符后，最长子串的长度是半径减1，起始位置是中间位置减去半径再除以2。
+*/
+#include<bits/stdc++.h>
 using namespace std;
 const int maxn=1e6+5;
 struct Manacher
