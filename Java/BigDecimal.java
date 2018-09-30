@@ -33,7 +33,8 @@ public class Main {
 	public static BigDecimal distance(point x, point y)// 没有开根
 	{
 		BigDecimal temp;
-		temp = ((x.a.subtract(y.a)).multiply(x.a.subtract(y.a))).add((x.b.subtract(y.b)).multiply(x.b.subtract(y.b)));
+		temp = ((x.a.subtract(y.a)).multiply(x.a.subtract(y.a))).add((x.b.subtract(y.b)).
+multiply(x.b.subtract(y.b)));
 		return temp;
 	}
 
