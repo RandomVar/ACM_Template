@@ -9,7 +9,7 @@ struct Point
 {
     int xy[2];
     int l,r,id;
-    int c;
+    int c;//题目额外要求的
     void read(int i)
     {
         id=i;
@@ -24,7 +24,7 @@ bool cmp(const Point &a,const Point &b)
 {
     return a.xy[cmpw]<b.xy[cmpw];
 }
-int build(int l,int r,int w)
+int build(int l,int r,int w)//w是维度标记
 {
     int m=(l+r)/2;cmpw=w;
     nth_element(p+l,p+m,p+1+r,cmp);
@@ -45,7 +45,7 @@ void  query(int rt,int w,ll x,ll y)
     ll tmp=dis(x-p[rt].xy[0],y-p[rt].xy[1]);
     if(cost<p[rt].c)
      tmp=INF;
-    if(tmp<ans||(tmp!=INF&&tmp==ans&&p[rt].id<result.id))
+    if(tmp<ans||(tmp!=INF&&tmp==ans&&p[rt].id<result.id))//attention 按题目要求来
      result=p[rt];
     ans=min(ans,tmp);
     if(p[rt].l&&p[rt].r)
