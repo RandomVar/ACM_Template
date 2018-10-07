@@ -6,3 +6,6 @@ ADD Computational_Geometry
 
 + 2018-10-1
 ADD kd_tree.cpp
+
++ 2018-10-8
+UPDATE some files
