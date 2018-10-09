@@ -51,7 +51,7 @@ void init(int n)
 void dfs(int u, int fa)
 {
     dep[u] = dep[fa] + 1;
-    dfn[u] = sp.size();
+    dfn[u] = sp.size();//欧拉序列
     sp.push_back(u);
     for (auto& v : edge[u])
     {
@@ -60,6 +60,7 @@ void dfs(int u, int fa)
         sp.push_back(u);
     }
 }
+/*i,j的lca为i,j进栈之间进出栈的点中进栈时间最早的*/
 void initrmq()
 {
     int n = sp.size();

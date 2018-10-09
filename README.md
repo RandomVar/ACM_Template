@@ -9,3 +9,6 @@ ADD kd_tree.cpp
 
 + 2018-10-8
 UPDATE some files
+
++ 2018-10-9
+ADD Tree_divide.cpp
