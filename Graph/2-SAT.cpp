@@ -15,9 +15,12 @@ void init(int n){
     for(int i=0;i<n*2;i++) g[i].clear();
     memset(mark,0,sizeof(mark));
 }
-void add_clause(int x,int y){
-    g[x].push_back(y);//选了x就必须选y^1
-
+void add_clause(int x,int xval,int y,int yval){
+//x的xval状态与y的yval状态冲突
+    x=x*2+xval;
+    y=y*2+yval;
+    g[x^1].push_back(y); //选了x^1就必须选y，连边表示 推导出
+    g[y^1].push_back(x);
 }
 bool solve(int n){
     for(int i=0;i<n*2;i+=2)
