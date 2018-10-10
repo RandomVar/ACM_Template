@@ -41,7 +41,8 @@ int main(){
            while(s<t&&getup(que[s+1],que[s])<=sum[i]*getdown(que[s+1],que[s]))
              s++;
             dp[i]=getdp(i,que[s]);
-            while(s<t&&getup(i,que[t])*getdown(que[t],que[t-1])<=getup(que[t],que[t-1])*getdown(i,que[t]))
+            while(s<t&&getup(i,que[t])*getdown(que[t],que[t-1])<=
+            getup(que[t],que[t-1])*getdown(i,que[t]))
                t--;
             que[++t]=i;
        }

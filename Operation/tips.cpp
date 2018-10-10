@@ -5,5 +5,18 @@ printf("%04d\n",x);//输出4位,不足则前面填充0
  long double t1 = (l - t2 * v2) / v1;
 cout << fixed << setprecision(10) << t1 << endl;//保留10位小数
 
-for(int i=x;i;i=(i-1)&x) //i二进制中为1的位在x中必定为1，从大到小输出所有符合条件的i
+/*枚举真子集*/
+for(int i=x;i;i=(i-1)&x)
     cout<<i<<endl;
+
+/*枚举大小为 k 的子集*/
+void subset(int k, int n)
+{
+   int t = (1 << k) - 1;
+   while (t < (1 << n))
+   {
+   // do something
+   int x = t & -t, y = t + x;
+ t = ((t & ~y) / x >> 1) | y;
+  }
+}
