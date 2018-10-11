@@ -20,3 +20,8 @@ void subset(int k, int n)
  t = ((t & ~y) / x >> 1) | y;
   }
 }
+
+/**mt19937随机数*/
+ unsigned seed=chrono::system_clock::now().time_since_epoch().count();
+    mt19937 generator(seed);
+    cout<<generator()<<endl;
