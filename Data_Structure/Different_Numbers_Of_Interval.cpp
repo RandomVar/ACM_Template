@@ -8,7 +8,7 @@ map<int,int>mp;
 struct node{
     int l,r,id;
     bool operator<(const node &t)const{
-        return l<t.l;
+        return r<t.r;
     }
 }q[maxn];
 int sum(int x);

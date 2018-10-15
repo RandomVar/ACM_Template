@@ -9,13 +9,13 @@ struct seg{
 int res;
 int col[maxn<<2];
 double sum[maxn<<2];
-double x[maxn<<2];
+vector<double>v;
 int cmp(seg a,seg b){
 return a.h<b.h;
 }
 void pushup(int rt,int l,int r){
-   if(col[rt]) sum[rt]=x[r+1]-x[l];//[ )
-   else if(l==r) sum[rt]=0;
+   if(col[rt]) sum[rt]=v[r]-v[l];
+   else if(l+1==r) sum[rt]=0;//已经是最基础的一段
    else sum[rt]=sum[rt<<1]+sum[rt<<1|1];
 }
 
@@ -31,53 +31,32 @@ void update(int l,int r,int c,int rt,int ll,int rr){//l,r is fresh area
   if(r>mid) update(l,r,c,rt*2+1,mid+1,rr);
   pushup(rt,ll,rr);
 }
-
-int bfind(double t){
-  /*int lb=0,rb=res;
-  while(lb<=rb){
-    int mid=(lb+rb)/2;
-    if(x[mid]>t) rb=mid-1;
-    else lb=mid+1;
-  }
-  return lb;*/
-  int lb=-1,ub=res;
-  while(ub-lb>1){
-    int mid=(lb+ub)/2;
-    if(x[mid]>=t) ub=mid;
-    else lb=mid;
-  }
-  return ub;
+int getid(double x)
+{
+    return lower_bound(v.begin(),v.end(),x);
 }
-
 int main(){
     int n;int k=0;
     while(cin>>n&&n){
             k++;
             int cnt=0;
+            v.clear();
         for(int i=0;i<n;i++){
             double a,b,c,d;
             cin>>a>>b>>c>>d;
-            s[cnt]=seg{a,c,b,1};//bottom line
-            x[cnt++]=a;
-            s[cnt]=seg{a,c,d,-1};//top line
-            x[cnt++]=c;
+            s[cnt++]=seg{a,c,b,1};//bottom line
+            s[cnt++]=seg{a,c,d,-1};//top line
+           v.push_back(a);v.push_back(c);
         }
-        sort(x,x+cnt);
+        sort(v.begin(),v.end());v.erase(unique(v.begin(),v.end()),v.end());
         sort(s,s+cnt,cmp);
-       // int
-         res=0;
-        for(int i=1;i<cnt;i++){
-            if(x[i]!=x[i-1]){
-                x[++res]=x[i];
-            }
-        }
+        res=v.size();
         memset(col,0,sizeof(col));
         memset(sum,0,sizeof(sum));
         double ans=0;
         for(int i=0;i<cnt-1;i++){
-            //cout<<1<<endl;
-            int l=bfind(s[i].l);
-            int r=bfind(s[i].r)-1;
+            int l=getid(s[i].l);
+            int r=getid(s[i].r);
             update(l,r,s[i].s,1,0,res);
             ans+=sum[1]*(s[i+1].h-s[i].h);
         }
