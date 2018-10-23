@@ -31,6 +31,7 @@ void dij(int s){
 
 /****SPFA****/
 /*若存在负环回路则返回1*/
+
 const int maxn = " ";
 struct node{
   int to,cost;
@@ -51,7 +52,7 @@ int spfa(int x)
   vis[x]=1;cnt[x]=1;
   while(!que.empty())
   {
-    int t=que.top;
+    int t=que.front();
     que.pop();
     vis[t]=0;
     for(int i=0;i<edge[t].size;i++){
