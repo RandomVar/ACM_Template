@@ -74,3 +74,10 @@ for(int k=1;k<=n;k++)
     for(int i=1;i<=n;i++)
       for(int j=1;j<=n;j++)
         d[i][j]=min(d[i][j],d[i][k]+d[k][j]);
+
+/*差分约束系统*/
+/*
+根据最短路的性质
+对于任何一条边u -> v，都有
+d(v) <= d(u) + w(u, v)
+*/
