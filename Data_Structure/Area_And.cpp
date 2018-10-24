@@ -1,4 +1,5 @@
 /*矩形面积并*/
+//hdu1542
 #include<bits/stdc++.h>
 using namespace std;
 const int maxn=2010;
@@ -14,8 +15,8 @@ int cmp(seg a,seg b){
 return a.h<b.h;
 }
 void pushup(int rt,int l,int r){
-   if(col[rt]) sum[rt]=v[r]-v[l];
-   else if(l+1==r) sum[rt]=0;//已经是最基础的一段
+   if(col[rt]) sum[rt]=v[r+1]-v[l];//[)
+   else if(l==r) sum[rt]=0;
    else sum[rt]=sum[rt<<1]+sum[rt<<1|1];
 }
 
@@ -33,7 +34,7 @@ void update(int l,int r,int c,int rt,int ll,int rr){//l,r is fresh area
 }
 int getid(double x)
 {
-    return lower_bound(v.begin(),v.end(),x);
+    return lower_bound(v.begin(),v.end(),x)-v.begin();
 }
 int main(){
     int n;int k=0;
@@ -56,7 +57,7 @@ int main(){
         double ans=0;
         for(int i=0;i<cnt-1;i++){
             int l=getid(s[i].l);
-            int r=getid(s[i].r);
+            int r=getid(s[i].r)-1;
             update(l,r,s[i].s,1,0,res);
             ans+=sum[1]*(s[i+1].h-s[i].h);
         }
