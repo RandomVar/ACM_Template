@@ -14,6 +14,7 @@ vector<double>v;
 int cmp(seg a,seg b){
 return a.h<b.h;
 }
+/*对点离散化之后，原来的区间[l,r]变为[l,mid],[mid+1,r]时，会缺少一段*/
 void pushup(int rt,int l,int r){
    if(col[rt]) sum[rt]=v[r+1]-v[l];//[)
    else if(l==r) sum[rt]=0;
@@ -57,7 +58,7 @@ int main(){
         double ans=0;
         for(int i=0;i<cnt-1;i++){
             int l=getid(s[i].l);
-            int r=getid(s[i].r)-1;
+            int r=getid(s[i].r)-1;//attention
             update(l,r,s[i].s,1,0,res);
             ans+=sum[1]*(s[i+1].h-s[i].h);
         }
