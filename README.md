@@ -1,20 +1,7 @@
-## update
-+ 2018-9-30 
-ADD 01Trie.cpp 
-UPDATE KM 
-ADD Computational_Geometry
+weiers.pdf更新于2018-10-25
 
-+ 2018-10-1
-ADD kd_tree.cpp
+错误/写丑的地方很多
 
-+ 2018-10-8
-UPDATE some files
+希望各位指正/提出意见
 
-+ 2018-10-9
-ADD Tree_divide.cpp
-
-+ 2018-10-10
-ADD 1D_1DDP.cpp
-
-+ 错误/写丑的地方很多
-持续更新中……
+KEEP UPATING FOREVER……
